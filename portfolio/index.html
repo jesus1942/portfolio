@@ -181,6 +181,7 @@
         <a href="#proyectos" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors hidden sm:block">Proyectos</a>
         <a href="#skills" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors hidden sm:block">Skills</a>
         <a href="#contacto" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors hidden sm:block">Contacto</a>
+        <a href="https://activaqr-production.up.railway.app/" target="_blank" rel="noopener" class="text-xs text-green-400 hover:text-green-300 transition-colors hidden sm:block">ActivaQR ↗</a>
         <a href="https://wa.me/5492804018359?text=Hola%20Jesús%2C%20vi%20tu%20portfolio%20y%20me%20gustaría%20contactarte."
            target="_blank" rel="noopener"
            class="group flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-300 text-xs font-medium hover:bg-cyan-500/15 transition-all">
@@ -215,10 +216,20 @@
           <!-- TEXT SIDE -->
           <div class="text-center md:text-left">
 
-            <!-- Badge -->
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-medium mb-6 soft-pulse">
-              <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
-              Disponible para proyectos
+            <!-- Badges -->
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-6">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-medium soft-pulse">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                Disponible para proyectos
+              </div>
+              <a href="https://activaqr-production.up.railway.app/#planes" target="_blank" rel="noopener"
+                 class="group inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-300 text-xs font-medium hover:bg-green-500/20 transition-all">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-400 soft-pulse"></span>
+                ActivaQR en vivo · entrá y suscribite
+                <svg class="w-3 h-3 scribble-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/>
+                </svg>
+              </a>
             </div>
 
             <h1 class="text-5xl sm:text-7xl font-bold mb-4 tracking-tight leading-none">
@@ -652,58 +663,118 @@
           </div>
         </div>
 
-        <!-- Other projects grid -->
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Featured: ActivaQR — app activa y abierta al público -->
+        <div class="reveal mb-6">
+          <div class="glass glass-hover rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+            <!-- Live badge -->
+            <div class="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-500/15 border border-green-500/30 text-green-400 text-xs font-medium">
+              <span class="w-1.5 h-1.5 rounded-full bg-green-400 soft-pulse"></span>
+              App activa · abierta al público
+            </div>
 
-          <!-- ActivaQR -->
-          <div class="reveal glass glass-hover rounded-2xl p-5">
-            <!-- Hand-drawn QR + industrial asset sketch -->
-            <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="15" y="15" width="20" height="20" rx="2"/>
-              <rect x="21" y="21" width="8" height="8" fill="currentColor" stroke="none" opacity="0.7"/>
-              <rect x="15" y="45" width="20" height="20" rx="2"/>
-              <rect x="21" y="51" width="8" height="8" fill="currentColor" stroke="none" opacity="0.7"/>
-              <rect x="45" y="15" width="20" height="20" rx="2"/>
-              <rect x="51" y="21" width="8" height="8" fill="currentColor" stroke="none" opacity="0.7"/>
-              <path d="M45 45 L52 45 L52 52 L60 52 L60 65 M45 58 L48 58 M58 45 L65 45 M65 58 L65 65"/>
-              <rect x="92" y="20" width="44" height="42" rx="4"/>
-              <path d="M99 28 L129 28 M99 36 L120 36 M99 50 Q108 44 116 50 T131 50" stroke-dasharray="3 3"/>
-              <circle cx="132" cy="28" r="2" fill="currentColor" stroke="none"/>
-              <path d="M82 40 Q70 40 64 52"/>
-            </svg>
-            <div class="flex items-start justify-between mb-1">
-              <h3 class="font-bold text-white">ActivaQR</h3>
-              <span class="px-2 py-0.5 rounded-full text-[10px] border border-green-500/30 bg-green-500/10 text-green-400">Live</span>
-            </div>
-            <p class="text-zinc-500 text-xs leading-relaxed mb-3">
-              SaaS multi-empresa para gestión de activos industriales por QR. Ficha pública sin login,
-              mediciones desde el celular, alertas por parámetros fuera de rango, reportes y suscripciones con Mercado Pago.
-            </p>
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="tag tag-react">React</span>
-              <span class="tag tag-ts">TypeScript</span>
-              <span class="tag tag-node">Node.js</span>
-              <span class="tag tag-prisma">Prisma</span>
-              <span class="tag tag-postgres">PostgreSQL</span>
-              <span class="tag tag-pwa">PWA</span>
-            </div>
-            <div class="flex gap-4">
-              <a href="https://jesus1942.github.io/ActivaQr/" target="_blank" rel="noopener"
-                 class="group inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 transition-colors font-medium">
-                Ver aplicación
-                <svg class="w-3.5 h-3.5 scribble-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <!-- Hand-drawn QR + industrial asset sketch -->
+                <svg viewBox="0 0 160 80" class="w-28 h-16 text-cyan-400/70 mb-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="15" y="15" width="20" height="20" rx="2"/>
+                  <rect x="21" y="21" width="8" height="8" fill="currentColor" stroke="none" opacity="0.7"/>
+                  <rect x="15" y="45" width="20" height="20" rx="2"/>
+                  <rect x="21" y="51" width="8" height="8" fill="currentColor" stroke="none" opacity="0.7"/>
+                  <rect x="45" y="15" width="20" height="20" rx="2"/>
+                  <rect x="51" y="21" width="8" height="8" fill="currentColor" stroke="none" opacity="0.7"/>
+                  <path d="M45 45 L52 45 L52 52 L60 52 L60 65 M45 58 L48 58 M58 45 L65 45 M65 58 L65 65"/>
+                  <rect x="92" y="20" width="44" height="42" rx="4"/>
+                  <path d="M99 28 L129 28 M99 36 L120 36 M99 50 Q108 44 116 50 T131 50" stroke-dasharray="3 3"/>
+                  <circle cx="132" cy="28" r="2" fill="currentColor" stroke="none"/>
+                  <path d="M82 40 Q70 40 64 52"/>
                 </svg>
-              </a>
-              <a href="https://github.com/jesus1942/ActivaQr" target="_blank" rel="noopener"
-                 class="group inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-cyan-400 transition-colors">
-                GitHub
-                <svg class="w-3.5 h-3.5 scribble-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/>
-                </svg>
-              </a>
+
+                <h3 class="text-2xl font-bold text-white mb-2 hand-underline inline-block">ActivaQR</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-4">
+                  SaaS multi-empresa para gestión de activos industriales por QR. <span class="text-cyan-300">Ya está online y abierta:</span>
+                  cualquiera puede entrar, crear su cuenta y suscribirse con Mercado Pago. Ficha pública sin login,
+                  mediciones desde el celular, alertas por parámetros fuera de rango y reportes.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mb-5">
+                  <span class="tag tag-react">React</span>
+                  <span class="tag tag-ts">TypeScript</span>
+                  <span class="tag tag-node">Node.js</span>
+                  <span class="tag tag-prisma">Prisma</span>
+                  <span class="tag tag-postgres">PostgreSQL</span>
+                  <span class="tag tag-pwa">PWA</span>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                  <a href="https://activaqr-production.up.railway.app/#planes" target="_blank" rel="noopener"
+                     class="group flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-all hover:scale-105"
+                     style="background: linear-gradient(135deg, #0891b2, #0e7490)">
+                    Entrar y suscribirme
+                    <svg class="w-3.5 h-3.5 scribble-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/>
+                    </svg>
+                  </a>
+                  <a href="https://github.com/jesus1942/ActivaQr" target="_blank" rel="noopener"
+                     class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border border-white/10 bg-white/5 text-zinc-300 hover:bg-white/10 transition-all hover:scale-105">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 7 L4 12 L9 17 M15 7 L20 12 L15 17"/>
+                    </svg>
+                    Código
+                  </a>
+                </div>
+              </div>
+
+              <div class="hidden md:block">
+                <!-- Sketched feature list "page" -->
+                <div class="glass rounded-xl p-5 relative">
+                  <svg class="absolute -top-2 -left-2 w-8 h-8 text-cyan-500/50" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+                    <path d="M4 16 Q4 4 16 4 Q28 4 28 16 Q28 28 16 28 Q4 28 4 16 Z" stroke-dasharray="2 3"/>
+                  </svg>
+                  <p class="font-hand text-cyan-300/90 text-xl mb-3 leading-none">Cómo se usa</p>
+                  <div class="space-y-2 text-xs text-zinc-400">
+                    <div class="flex items-start gap-2">
+                      <svg class="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 12 L10 18 L20 6"/>
+                      </svg>
+                      Entrás y creás tu cuenta gratis
+                    </div>
+                    <div class="flex items-start gap-2">
+                      <svg class="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 12 L10 18 L20 6"/>
+                      </svg>
+                      Te suscribís con Mercado Pago
+                    </div>
+                    <div class="flex items-start gap-2">
+                      <svg class="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 12 L10 18 L20 6"/>
+                      </svg>
+                      Generás QR para tus activos
+                    </div>
+                    <div class="flex items-start gap-2">
+                      <svg class="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 12 L10 18 L20 6"/>
+                      </svg>
+                      Ficha pública sin login
+                    </div>
+                    <div class="flex items-start gap-2">
+                      <svg class="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 12 L10 18 L20 6"/>
+                      </svg>
+                      Mediciones desde el celular
+                    </div>
+                    <div class="flex items-start gap-2">
+                      <svg class="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 12 L10 18 L20 6"/>
+                      </svg>
+                      Alertas por parámetros fuera de rango
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+
+        <!-- Other projects grid -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
           <!-- BCRA Consultas -->
           <div class="reveal glass glass-hover rounded-2xl p-5">

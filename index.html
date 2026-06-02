@@ -972,42 +972,49 @@
             </span>
           </div>
 
-          <!-- Bible Scholar -->
+          <!-- BibleApp PWA -->
           <div class="reveal from-right glass glass-hover rounded-2xl p-5">
-            <!-- Hand-drawn open Bible + search/projection sketch -->
+            <!-- Hand-drawn open book + phone hint (mobile PWA) + highlight underline -->
             <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M50 22 L50 70"/>
-              <path d="M15 26 Q15 23 17 23 L48 20 L50 22 L48 70 L17 70 Q15 70 15 68 Z"/>
-              <path d="M85 26 Q85 23 83 23 L52 20 L50 22 L52 70 L83 70 Q85 70 85 68 Z"/>
-              <path d="M22 32 L42 30 M22 38 L42 36 M22 44 L40 42 M22 50 L42 48"/>
-              <path d="M58 32 L80 34 M58 38 L80 40 M58 44 L78 46"/>
-              <circle cx="118" cy="30" r="12"/>
-              <path d="M127 39 L138 50"/>
-              <rect x="105" y="55" width="38" height="18" rx="1"/>
-              <path d="M110 62 L138 62 M110 68 L130 68"/>
+              <path d="M65 18 L65 70"/>
+              <path d="M14 22 Q14 19 16 19 L63 16 L65 18 L63 70 L16 70 Q14 70 14 68 Z"/>
+              <path d="M116 22 Q116 19 114 19 L67 16 L65 18 L67 70 L114 70 Q116 70 116 68 Z"/>
+              <path d="M22 28 L58 26 M22 35 L58 33 M22 42 L54 40 M22 49 L58 47 M22 56 L50 54"/>
+              <path d="M72 26 L110 28 M72 33 L110 35 M72 40 L106 42 M72 47 L110 49 M72 54 L100 56"/>
+              <path d="M22 49 L50 47" stroke-width="2.3" opacity="0.7"/>
+              <rect x="128" y="20" width="20" height="42" rx="3"/>
+              <path d="M135 56 L141 56"/>
+              <path d="M132 27 L144 27 M132 32 L142 32 M132 37 L144 37 M132 42 L140 42"/>
             </svg>
             <div class="flex items-start justify-between mb-1">
-              <h3 class="font-bold text-white">Bible Scholar</h3>
+              <h3 class="font-bold text-white">BibleApp</h3>
               <span class="px-2 py-0.5 rounded-full text-[10px] border border-green-500/30 bg-green-500/10 text-green-400">Live</span>
             </div>
             <p class="text-zinc-500 text-xs leading-relaxed mb-3">
-              App de búsqueda y proyección de textos bíblicos en tiempo real. Encontrás un versículo
-              y lo presentás en pantalla en las versiones disponibles — pensada para servicios, estudios y predicaciones.
-              En producción con seguimiento de uso por Umami.
+              PWA de lectura bíblica sin distracciones. Versículo diario con temas (paz, esperanza, gratitud, fortaleza),
+              lectura por capítulos con resaltado táctil y modo inmersivo, notas y marcadores, recordatorios diarios y
+              comunidad por iglesia/eventos. Arquitectura híbrida: frontend en GitHub Pages, base de datos y backend en Railway.
+              Trazabilidad de uso real con Umami.
             </p>
             <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="tag tag-py">Python</span>
-              <span class="tag tag-html">Web</span>
-              <span class="tag tag-railway">Railway</span>
-              <span class="tag tag-node">Umami</span>
+              <span class="tag tag-js">JavaScript</span>
+              <span class="tag tag-pwa">PWA</span>
+              <span class="tag tag-postgres">Railway DB</span>
+              <span class="tag tag-railway">Umami</span>
             </div>
-            <a href="https://bible-app-production.up.railway.app/" target="_blank" rel="noopener"
-               class="group inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 transition-colors font-medium">
-              Ver en vivo
-              <svg class="w-3.5 h-3.5 scribble-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/>
-              </svg>
-            </a>
+            <div class="flex gap-4">
+              <a href="https://jesus1942.github.io/readBible/" target="_blank" rel="noopener"
+                 class="group inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 transition-colors font-medium">
+                Ver en vivo
+                <svg class="w-3.5 h-3.5 scribble-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/>
+                </svg>
+              </a>
+              <a href="https://github.com/jesus1942/readBible" target="_blank" rel="noopener"
+                 class="group inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-cyan-400 transition-colors">
+                GitHub
+              </a>
+            </div>
           </div>
 
           <!-- BCRA Consultas -->
@@ -1055,38 +1062,8 @@
             </div>
           </div>
 
-          <!-- ReadBible -->
-          <div class="reveal from-right glass glass-hover rounded-2xl p-5">
-            <!-- Hand-drawn open book -->
-            <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M80 20 L80 70"/>
-              <path d="M20 25 Q20 22 22 22 L78 18 L80 20 L78 70 L22 70 Q20 70 20 68 Z"/>
-              <path d="M140 25 Q140 22 138 22 L82 18 L80 20 L82 70 L138 70 Q140 70 140 68 Z"/>
-              <path d="M30 30 L70 28 M30 38 L70 36 M30 46 L65 44 M30 54 L70 52 M30 62 L60 60"/>
-              <path d="M90 28 L130 30 M90 36 L130 38 M90 44 L125 46 M90 52 L130 54 M90 60 L120 62"/>
-            </svg>
-            <h3 class="font-bold text-white mb-1">ReadBible PWA</h3>
-            <p class="text-zinc-500 text-xs leading-relaxed mb-3">
-              Lector de Biblia minimalista, offline-first con múltiples versiones en español.
-              Búsqueda rápida, versículo del día y compartir con imagen.
-            </p>
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="tag tag-js">JavaScript</span>
-              <span class="tag tag-py">Python</span>
-              <span class="tag tag-pwa">PWA</span>
-              <span class="tag tag-railway">Offline</span>
-            </div>
-            <a href="https://github.com/jesus1942/readBible" target="_blank" rel="noopener"
-               class="group inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-cyan-400 transition-colors">
-              Ver en GitHub
-              <svg class="w-3.5 h-3.5 scribble-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/>
-              </svg>
-            </a>
-          </div>
-
           <!-- Tarjetitas -->
-          <div class="reveal from-left glass glass-hover rounded-2xl p-5">
+          <div class="reveal from-right glass glass-hover rounded-2xl p-5">
             <!-- Hand-drawn cards stack with QR -->
             <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <rect x="30" y="20" width="60" height="40" rx="3" transform="rotate(-5 60 40)"/>
@@ -1125,7 +1102,7 @@
           </div>
 
           <!-- AquaTech -->
-          <div class="reveal from-right glass glass-hover rounded-2xl p-5">
+          <div class="reveal from-left glass glass-hover rounded-2xl p-5">
             <!-- Hand-drawn water drop with monitor -->
             <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M55 15 Q40 35 40 50 Q40 65 55 65 Q70 65 70 50 Q70 35 55 15 Z"/>
@@ -1158,7 +1135,7 @@
           </div>
 
           <!-- Tutti Frutti -->
-          <div class="reveal from-left glass glass-hover rounded-2xl p-5">
+          <div class="reveal from-right glass glass-hover rounded-2xl p-5">
             <!-- Hand-drawn STOP card with letters -->
             <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M50 20 L80 14 L110 20 L116 50 L90 70 L70 70 L44 50 Z"/>
@@ -1192,7 +1169,7 @@
           </div>
 
           <!-- Audio Visualizer -->
-          <div class="reveal from-right glass glass-hover rounded-2xl p-5">
+          <div class="reveal from-left glass glass-hover rounded-2xl p-5">
             <!-- Hand-drawn audio waveform -->
             <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M10 40 L10 40 M20 35 L20 45 M30 30 L30 50 M40 22 L40 58 M50 28 L50 52 M60 15 L60 65 M70 25 L70 55 M80 10 L80 70 M90 25 L90 55 M100 18 L100 62 M110 30 L110 50 M120 35 L120 45 M130 28 L130 52 M140 38 L140 42 M150 40 L150 40"/>

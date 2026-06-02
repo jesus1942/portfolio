@@ -96,23 +96,30 @@
       background-size: 100% 4px;
     }
 
-    /* Reveal — hand-drawn entrance */
+    /* Reveal — ink-settling entrance (organic, subtle) */
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(14px) scale(0.985);
+      transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
       will-change: opacity, transform;
     }
-    .reveal.from-left  { transform: translateX(-90px) rotate(-3deg); }
-    .reveal.from-right { transform: translateX(90px) rotate(3deg); }
-    .reveal.from-scale { transform: scale(0.88) rotate(-1.5deg); }
+    .reveal.from-left  { transform: translate(-18px, 10px) rotate(-0.6deg); }
+    .reveal.from-right { transform: translate(18px, 10px) rotate(0.6deg); }
+    .reveal.from-scale { transform: scale(0.94) rotate(-0.4deg); }
     .reveal.visible {
       opacity: 1;
       transform: translate(0, 0) rotate(0deg) scale(1);
     }
+    /* Soft stagger between siblings in a grid — feels like ink drying in sequence */
+    .grid > .reveal:nth-child(2) { transition-delay: 90ms; }
+    .grid > .reveal:nth-child(3) { transition-delay: 180ms; }
+    .grid > .reveal:nth-child(4) { transition-delay: 270ms; }
+    .grid > .reveal:nth-child(5) { transition-delay: 360ms; }
+    .grid > .reveal:nth-child(6) { transition-delay: 450ms; }
+    .grid > .reveal:nth-child(7) { transition-delay: 540ms; }
     @media (prefers-reduced-motion: reduce) {
-      .reveal { transition: opacity 0.3s ease; transform: none !important; }
+      .reveal { transition: opacity 0.3s ease; transform: none !important; transition-delay: 0ms !important; }
     }
 
     /* Sketch line animation */
@@ -1253,13 +1260,16 @@
   </footer>
 
   <script>
+    // Bidirectional reveal: animate in entering, animate out when leaving
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
         }
       });
-    }, { threshold: 0.08, rootMargin: '-20px' });
+    }, { threshold: 0.12, rootMargin: '-40px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 </body>

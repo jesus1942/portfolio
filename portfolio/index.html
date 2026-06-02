@@ -53,7 +53,7 @@
   </script>
   <style>
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #030508; color: white; }
+    body { font-family: 'Inter', sans-serif; background: #030508; color: white; overflow-x: hidden; }
 
     /* Dot grid */
     .dot-grid {
@@ -96,15 +96,23 @@
       background-size: 100% 4px;
     }
 
-    /* Reveal */
+    /* Reveal — hand-drawn entrance */
     .reveal {
       opacity: 0;
       transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
     }
+    .reveal.from-left  { transform: translateX(-90px) rotate(-3deg); }
+    .reveal.from-right { transform: translateX(90px) rotate(3deg); }
+    .reveal.from-scale { transform: scale(0.88) rotate(-1.5deg); }
     .reveal.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: opacity 0.3s ease; transform: none !important; }
     }
 
     /* Sketch line animation */
@@ -323,8 +331,8 @@
     <!-- ABOUT -->
     <section id="sobre-mi" class="py-20 px-4">
       <div class="max-w-4xl mx-auto">
-        <div class="reveal grid md:grid-cols-5 gap-8 items-start">
-          <div class="md:col-span-3">
+        <div class="grid md:grid-cols-5 gap-8 items-start">
+          <div class="reveal from-left md:col-span-3">
             <p class="text-xs font-mono text-cyan-400 tracking-wider mb-3">// sobre mí</p>
             <h2 class="text-3xl font-bold grad-white mb-4">
               De la Patagonia al
@@ -344,7 +352,7 @@
           </div>
 
           <!-- About sidebar with hand-drawn icons -->
-          <div class="md:col-span-2">
+          <div class="reveal from-right md:col-span-2">
             <div class="glass rounded-2xl p-5 space-y-1 relative">
               <svg class="absolute -top-2 -right-2 w-8 h-8 text-cyan-500/25" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
                 <path d="M16 2 L16 8 M16 24 L16 30 M2 16 L8 16 M24 16 L30 16 M6 6 L10 10 M22 22 L26 26 M26 6 L22 10 M10 22 L6 26"/>
@@ -428,9 +436,9 @@
           </p>
         </div>
 
-        <div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <!-- Soldadura -->
-          <div class="glass rounded-xl p-5 relative">
+          <div class="reveal from-left glass rounded-xl p-5 relative">
             <svg class="absolute top-2 right-2 w-5 h-5 opacity-20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" style="color:#fbbf24">
               <path d="M4 16 L16 4 M14 4 L16 4 L16 6"/>
             </svg>
@@ -454,7 +462,7 @@
           </div>
 
           <!-- Electricidad industrial + PLC -->
-          <div class="glass rounded-xl p-5 relative">
+          <div class="reveal from-right glass rounded-xl p-5 relative">
             <svg class="absolute top-2 right-2 w-5 h-5 opacity-20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" style="color:#fbbf24">
               <path d="M4 16 L16 4 M14 4 L16 4 L16 6"/>
             </svg>
@@ -475,7 +483,7 @@
           </div>
 
           <!-- Reparaciones navales -->
-          <div class="glass rounded-xl p-5 relative">
+          <div class="reveal from-left glass rounded-xl p-5 relative">
             <svg class="absolute top-2 right-2 w-5 h-5 opacity-20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" style="color:#fbbf24">
               <path d="M4 16 L16 4 M14 4 L16 4 L16 6"/>
             </svg>
@@ -498,7 +506,7 @@
           </div>
 
           <!-- Operador de equipos -->
-          <div class="glass rounded-xl p-5 relative">
+          <div class="reveal from-right glass rounded-xl p-5 relative">
             <svg class="absolute top-2 right-2 w-5 h-5 opacity-20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" style="color:#fbbf24">
               <path d="M4 16 L16 4 M14 4 L16 4 L16 6"/>
             </svg>
@@ -525,7 +533,7 @@
         </div>
 
         <!-- Hilo conductor -->
-        <div class="reveal mt-6 glass rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+        <div class="reveal from-scale mt-6 glass rounded-2xl p-6 sm:p-8 relative overflow-hidden">
           <svg class="absolute -top-3 -right-3 w-16 h-16 text-amber-400/10" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
             <path d="M4 16 Q4 4 16 4 Q28 4 28 16 Q28 28 16 28 Q4 28 4 16 Z" stroke-dasharray="2 4"/>
           </svg>
@@ -538,9 +546,9 @@
             es una maqueta: es la herramienta que yo mismo hubiera querido tener en la obra.
           </p>
           <div class="mt-5 flex flex-wrap gap-3">
-            <a href="/servicios" target="_blank"
+            <a href="https://activaqr-production.up.railway.app/" target="_blank" rel="noopener"
                class="group inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border border-amber-500/30 bg-amber-500/5 text-amber-300 hover:bg-amber-500/10 transition-all">
-              Ver servicios técnicos en obra
+              Ver ActivaQR en vivo
               <svg class="w-3.5 h-3.5 scribble-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/>
               </svg>
@@ -579,9 +587,9 @@
           </h2>
         </div>
 
-        <div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <!-- Frontend -->
-          <div class="glass rounded-xl p-5 relative">
+          <div class="reveal from-left glass rounded-xl p-5 relative">
             <svg class="absolute top-2 right-2 w-5 h-5 opacity-20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" style="color:#67e8f9">
               <path d="M13 3 L17 3 L17 7 M3 13 L3 17 L7 17"/>
             </svg>
@@ -602,7 +610,7 @@
           </div>
 
           <!-- Backend -->
-          <div class="glass rounded-xl p-5 relative">
+          <div class="reveal from-right glass rounded-xl p-5 relative">
             <svg class="absolute top-2 right-2 w-5 h-5 opacity-20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" style="color:#67e8f9">
               <path d="M13 3 L17 3 L17 7 M3 13 L3 17 L7 17"/>
             </svg>
@@ -625,7 +633,7 @@
           </div>
 
           <!-- Data & Infra -->
-          <div class="glass rounded-xl p-5 relative">
+          <div class="reveal from-left glass rounded-xl p-5 relative">
             <svg class="absolute top-2 right-2 w-5 h-5 opacity-20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" style="color:#67e8f9">
               <path d="M13 3 L17 3 L17 7 M3 13 L3 17 L7 17"/>
             </svg>
@@ -647,7 +655,7 @@
           </div>
 
           <!-- IoT & Mobile -->
-          <div class="glass rounded-xl p-5 relative">
+          <div class="reveal from-right glass rounded-xl p-5 relative">
             <svg class="absolute top-2 right-2 w-5 h-5 opacity-20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" style="color:#67e8f9">
               <path d="M13 3 L17 3 L17 7 M3 13 L3 17 L7 17"/>
             </svg>
@@ -698,7 +706,7 @@
         </div>
 
         <!-- Featured: Pool Installer -->
-        <div class="reveal mb-6">
+        <div class="reveal from-scale mb-6">
           <div class="glass glass-hover rounded-2xl p-6 sm:p-8 relative overflow-hidden">
             <!-- Live badge -->
             <div class="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 text-xs font-medium">
@@ -807,7 +815,7 @@
         </div>
 
         <!-- Featured: ActivaQR — app activa y abierta al público -->
-        <div class="reveal mb-6">
+        <div class="reveal from-scale mb-6">
           <div class="glass glass-hover rounded-2xl p-6 sm:p-8 relative overflow-hidden">
             <!-- Live badge -->
             <div class="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-500/15 border border-green-500/30 text-green-400 text-xs font-medium">
@@ -924,7 +932,7 @@
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
           <!-- Tracker de Contenedores Urbanos -->
-          <div class="reveal glass glass-hover rounded-2xl p-5">
+          <div class="reveal from-left glass glass-hover rounded-2xl p-5">
             <!-- Hand-drawn container with route + pin -->
             <svg viewBox="0 0 160 80" class="w-20 h-12 text-amber-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M30 20 L75 20 L75 25 L30 25 Z"/>
@@ -958,7 +966,7 @@
           </div>
 
           <!-- BCRA Consultas -->
-          <div class="reveal glass glass-hover rounded-2xl p-5">
+          <div class="reveal from-right glass glass-hover rounded-2xl p-5">
             <!-- Hand-drawn bank chart sketch -->
             <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M10 65 L150 65"/>
@@ -1003,7 +1011,7 @@
           </div>
 
           <!-- ReadBible -->
-          <div class="reveal glass glass-hover rounded-2xl p-5">
+          <div class="reveal from-left glass glass-hover rounded-2xl p-5">
             <!-- Hand-drawn open book -->
             <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M80 20 L80 70"/>
@@ -1033,7 +1041,7 @@
           </div>
 
           <!-- Tarjetitas -->
-          <div class="reveal glass glass-hover rounded-2xl p-5">
+          <div class="reveal from-right glass glass-hover rounded-2xl p-5">
             <!-- Hand-drawn cards stack with QR -->
             <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <rect x="30" y="20" width="60" height="40" rx="3" transform="rotate(-5 60 40)"/>
@@ -1072,7 +1080,7 @@
           </div>
 
           <!-- AquaTech -->
-          <div class="reveal glass glass-hover rounded-2xl p-5">
+          <div class="reveal from-left glass glass-hover rounded-2xl p-5">
             <!-- Hand-drawn water drop with monitor -->
             <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M55 15 Q40 35 40 50 Q40 65 55 65 Q70 65 70 50 Q70 35 55 15 Z"/>
@@ -1105,7 +1113,7 @@
           </div>
 
           <!-- Tutti Frutti -->
-          <div class="reveal glass glass-hover rounded-2xl p-5">
+          <div class="reveal from-right glass glass-hover rounded-2xl p-5">
             <!-- Hand-drawn STOP card with letters -->
             <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M50 20 L80 14 L110 20 L116 50 L90 70 L70 70 L44 50 Z"/>
@@ -1139,7 +1147,7 @@
           </div>
 
           <!-- Audio Visualizer -->
-          <div class="reveal glass glass-hover rounded-2xl p-5">
+          <div class="reveal from-left glass glass-hover rounded-2xl p-5">
             <!-- Hand-drawn audio waveform -->
             <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M10 40 L10 40 M20 35 L20 45 M30 30 L30 50 M40 22 L40 58 M50 28 L50 52 M60 15 L60 65 M70 25 L70 55 M80 10 L80 70 M90 25 L90 55 M100 18 L100 62 M110 30 L110 50 M120 35 L120 45 M130 28 L130 52 M140 38 L140 42 M150 40 L150 40"/>

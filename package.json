@@ -4,15 +4,19 @@
   "description": "Portfolio personal de Jesús Olguín - Full-Stack Developer & IoT Solutions",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "icons": "node gen-icons.mjs"
   },
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.4"
   },
   "engines": {
     "node": ">=18"
   },
   "keywords": ["portfolio", "developer", "iot", "fullstack"],
-  "author": "Jesús Olguín <jesus1942@github>",
+  "author": "Jesús Olguín <chucky9425@gmail.com>",
   "license": "MIT"
 }

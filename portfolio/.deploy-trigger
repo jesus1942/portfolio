@@ -1,0 +1,5 @@
+# Archivo dummy SOLO para matchear el Watch Path '/portfolio/**' configurado en Railway
+# y forzar un redeploy. La fuente de verdad es la raiz del repo desde P0.
+# Cuando el Watch Path se limpie en Railway Settings, esta carpeta se puede borrar.
+trigger: 2026-06-21T20:54:39Z
+commit: 92053322326455b2a6a5dc3a071b7fa96c7d72bf

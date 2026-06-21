@@ -4,8 +4,18 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from current directory
-app.use(express.static(path.join(__dirname)));
+// Serve static files. Long cache for fingerprint-stable assets (imágenes, CSS),
+// sin cache para HTML (el service worker es network-first y queremos contenido fresco).
+app.use(express.static(path.join(__dirname), {
+  maxAge: '7d',
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'no-cache');
+    } else if (filePath.endsWith('sw.js')) {
+      res.setHeader('Cache-Control', 'no-cache');
+    }
+  },
+}));
 
 // Pretty route for the technical-services landing
 app.get('/servicios', (req, res) => {

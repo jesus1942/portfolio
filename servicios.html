@@ -132,6 +132,27 @@
       padding: 8px;
     }
     .nav-links a:hover { color: var(--white); }
+    a:focus-visible, button:focus-visible, .btn:focus-visible {
+      outline: 3px solid var(--orange);
+      outline-offset: 3px;
+    }
+    .skip-link {
+      position: absolute; left: -9999px; top: 0; z-index: 100;
+    }
+    .skip-link:focus {
+      left: 12px; top: 12px;
+      background: var(--navy); color: var(--white);
+      padding: 10px 16px; font-weight: 900; text-transform: uppercase;
+      letter-spacing: .06em; text-decoration: none; border: 3px solid var(--orange);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
     .nav-links .btn { min-height: auto; padding: 8px 14px; font-size: 12px; box-shadow: 3px 3px 0 var(--orange); }
     header {
       padding: 70px 0 54px;
@@ -292,7 +313,8 @@
   </style>
 </head>
 <body>
-  <div class="tape"></div>
+  <a href="#servicios" class="skip-link">Saltar al contenido</a>
+  <div class="tape" aria-hidden="true"></div>
 
   <nav>
     <div class="wrap">

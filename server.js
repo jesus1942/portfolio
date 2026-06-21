@@ -7,6 +7,11 @@ const PORT = process.env.PORT || 3000;
 // Serve static files from current directory
 app.use(express.static(path.join(__dirname)));
 
+// Pretty route for the technical-services landing
+app.get('/servicios', (req, res) => {
+  res.sendFile(path.join(__dirname, 'servicios.html'));
+});
+
 // SPA fallback → always serve index.html
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));

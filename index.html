@@ -6,9 +6,26 @@
   <title>Jesús Olguín · Full-Stack Developer & IoT Solutions</title>
   <meta name="description" content="Desarrollador full-stack especializado en soluciones IoT, PWAs y aplicaciones de gestión empresarial. Puerto Madryn, Patagonia Argentina." />
   <meta name="author" content="Jesús Olguín" />
-  <meta property="og:title" content="Jesús Olguín · Developer" />
-  <meta property="og:description" content="Full-Stack Developer & IoT Solutions · Puerto Madryn, Argentina" />
+  <link rel="canonical" href="https://portfolio-production-1f23.up.railway.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Jesús Olguín · Full-Stack Developer & IoT Solutions" />
+  <meta property="og:description" content="Desarrollador full-stack que viene del taller: soldadura, electricidad industrial y PLC. Construyo apps que resuelven problemas reales. Puerto Madryn, Patagonia." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://portfolio-production-1f23.up.railway.app/" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="Jesús Olguín" />
+  <meta property="og:image" content="https://portfolio-production-1f23.up.railway.app/og-portfolio.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Jesús Olguín — Full-Stack Developer & IoT Solutions" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Jesús Olguín · Full-Stack Developer & IoT Solutions" />
+  <meta name="twitter:description" content="Del taller al código: soldadura, electricidad industrial y PLC + apps que resuelven problemas reales. Puerto Madryn, Patagonia." />
+  <meta name="twitter:image" content="https://portfolio-production-1f23.up.railway.app/og-portfolio.png" />
+
   <link rel="icon" type="image/png" href="/icon-512.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.json" />
@@ -192,12 +209,15 @@
         <img src="/logo-isotipo.png" alt="Jesús Olguín" class="h-6 w-auto opacity-90" />
         <span class="font-mono text-sm text-zinc-400 tracking-wider">jesus<span class="text-cyan-400">.</span>olguin</span>
       </a>
-      <div class="flex items-center gap-6">
-        <a href="#recorrido" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors hidden sm:block">Recorrido</a>
-        <a href="#proyectos" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors hidden sm:block">Proyectos</a>
-        <a href="#skills" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors hidden sm:block">Skills</a>
-        <a href="#contacto" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors hidden sm:block">Contacto</a>
-        <a href="https://activaqr-production.up.railway.app/" target="_blank" rel="noopener" class="text-xs text-green-400 hover:text-green-300 transition-colors hidden sm:block">ActivaQR ↗</a>
+
+      <!-- Desktop links -->
+      <div class="hidden sm:flex items-center gap-6">
+        <a href="#sobre-mi" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">Sobre mí</a>
+        <a href="#recorrido" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">Recorrido</a>
+        <a href="#proyectos" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">Proyectos</a>
+        <a href="#skills" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">Skills</a>
+        <a href="/servicios" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">Servicios</a>
+        <a href="https://activaqr-production.up.railway.app/" target="_blank" rel="noopener" class="text-xs text-green-400 hover:text-green-300 transition-colors">ActivaQR ↗</a>
         <a href="https://wa.me/5492804018359?text=Hola%20Jesús%2C%20vi%20tu%20portfolio%20y%20me%20gustaría%20contactarte."
            target="_blank" rel="noopener"
            class="group flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-300 text-xs font-medium hover:bg-cyan-500/15 transition-all">
@@ -206,6 +226,32 @@
             <path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/>
           </svg>
         </a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button id="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu"
+              class="sm:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg border border-white/10 text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+        <svg id="menu-icon-open" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 7 H20 M4 12 H20 M4 17 H20"/>
+        </svg>
+        <svg id="menu-icon-close" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 6 L18 18 M18 6 L6 18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div id="mobile-menu" class="sm:hidden hidden border-t border-white/5" style="background: rgba(3,5,8,0.97); backdrop-filter: blur(20px);">
+      <div class="px-4 py-3 flex flex-col gap-1">
+        <a href="#sobre-mi" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Sobre mí</a>
+        <a href="#recorrido" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Recorrido</a>
+        <a href="#proyectos" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Proyectos</a>
+        <a href="#skills" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Skills</a>
+        <a href="#contacto" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Contacto</a>
+        <a href="/servicios" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Servicios técnicos</a>
+        <a href="https://activaqr-production.up.railway.app/" target="_blank" rel="noopener" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-green-400 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">ActivaQR ↗</a>
+        <a href="https://wa.me/5492804018359?text=Hola%20Jesús%2C%20vi%20tu%20portfolio%20y%20me%20gustaría%20contactarte." target="_blank" rel="noopener"
+           class="mobile-link mt-1 py-2.5 px-3 rounded-lg text-sm font-medium text-center text-cyan-300 border border-cyan-500/30 bg-cyan-500/5 hover:bg-cyan-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Conversemos por WhatsApp</a>
       </div>
     </div>
   </nav>
@@ -1257,7 +1303,7 @@
   <!-- FOOTER -->
   <footer class="relative z-10 border-t border-white/5 py-8 px-4">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-600">
-      <span>© 2026 Jesús Olguín · Domotics &amp; IoT Solutions</span>
+      <span>© 2026 Jesús Olguín · Domotics &amp; IoT Solutions · <a href="/servicios" class="hover:text-cyan-400 transition-colors underline decoration-dotted underline-offset-2">Servicios técnicos</a></span>
       <span class="font-hand text-base text-zinc-500">
         Hecho en Puerto Madryn, Patagonia
       </span><svg class="inline-block ml-2 w-10 h-5 opacity-30" viewBox="0 0 40 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="color:#67e8f9">
@@ -1275,6 +1321,28 @@
   </footer>
 
   <script>
+    // Mobile menu
+    (function () {
+      const btn = document.getElementById('menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      const iconOpen = document.getElementById('menu-icon-open');
+      const iconClose = document.getElementById('menu-icon-close');
+      if (!btn || !menu) return;
+      const setOpen = (open) => {
+        menu.classList.toggle('hidden', !open);
+        iconOpen.classList.toggle('hidden', open);
+        iconClose.classList.toggle('hidden', !open);
+        btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+      };
+      btn.addEventListener('click', (e) => { e.stopPropagation(); setOpen(menu.classList.contains('hidden')); });
+      menu.querySelectorAll('.mobile-link').forEach(a => a.addEventListener('click', () => setOpen(false)));
+      document.addEventListener('click', (e) => {
+        if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+    })();
+
     // Bidirectional reveal: animate in entering, animate out when leaving
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {

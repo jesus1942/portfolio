@@ -2,3 +2,8 @@ node_modules/
 *.log
 .DS_Store
 .env
+
+# Outputs generados por gen-flyer.mjs (material de difusión, no parte del sitio)
+flyer-a4.pdf
+flyer-instagram.png
+flyer-stories.png

@@ -86,7 +86,7 @@ const DECKS = [
     id: 'industria',
     pill: 'Industria y taller · Puerto Madryn',
     title: 'Soldadura,<br>naval y <span>electricidad industrial</span>.',
-    subtitle: 'Mantenimiento naval · Eléctrico industrial · Tableros · Soldadura · PLC',
+    subtitle: 'Mantenimiento naval · Eléctrico industrial · Tableros · Soldadura',
     ctaH: 'Trabajo técnico, <span>sin improvisar</span>.',
     ctaP: 'Manos antes que teclado · Diagnóstico y propuesta clara · Pensado para durar.',
     services: [
@@ -102,9 +102,6 @@ const DECKS = [
       { title:'Soldadura · 5 procesos', desc:'SMAW · MIG/MAG · TIG · GTAW · FCAW. Estructuras, reparaciones y mantenimiento industrial.',
         // welding torch with sparks
         icon:'<path d="M14 4 L20 4 L20 10 L14 10 Z M14 7 L4 17 L7 20 L17 10 M3 20l2-2 M5 13l-2-2"/>' },
-      { title:'PLC y automatización', desc:'Programación de PLC y control industrial aplicado. Formación en Minera Santa Cruz.',
-        // chip / IC
-        icon:'<rect x="6" y="6" width="12" height="12" rx="1"/><path d="M9 9h6v6H9z M2 9h4 M2 12h4 M2 15h4 M18 9h4 M18 12h4 M18 15h4 M9 2v4 M12 2v4 M15 2v4 M9 18v4 M12 18v4 M15 18v4"/>' },
     ],
   },
 ];

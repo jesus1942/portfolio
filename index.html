@@ -68,34 +68,17 @@
       #gh-activity{ transition:none; }
       #gh-activity .gh-cell{ animation:none; opacity:1; }
     }
-    /* Contador en vivo de contribuciones */
+    /* Contador de contribuciones — anotación a mano, sin badge */
     #gh-stat{
-      position:absolute; right:1.5rem; bottom:5.5rem; z-index:10;
-      display:inline-flex; align-items:center; gap:.5rem;
-      padding:.4rem .75rem; border-radius:9999px;
-      font-size:.72rem; color:#a1a1aa; text-decoration:none;
-      background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);
-      -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
-      opacity:0; transform:translateY(6px); transition:opacity .8s ease, transform .8s ease, color .2s, border-color .2s;
+      position:absolute; right:1.75rem; bottom:5.5rem; z-index:10;
+      font-size:1.35rem; line-height:1.05; letter-spacing:.2px;
+      color:#9ca3af; text-decoration:none; transform:rotate(-2.5deg);
+      opacity:0; transition:opacity 1s ease, color .25s;
     }
-    #gh-stat.is-ready{ opacity:1; transform:translateY(0); }
-    #gh-stat:hover{ color:#e4e4e7; border-color:rgba(103,232,249,.35); }
+    #gh-stat.is-ready{ opacity:.9; }
+    #gh-stat:hover{ color:#d4d4d8; }
     #gh-stat #gh-stat-num{ color:#67e8f9; font-weight:700; }
-    #gh-stat .gh-dot{
-      width:7px; height:7px; border-radius:9999px; background:#22c55e;
-      box-shadow:0 0 0 0 rgba(34,197,94,.6); animation:ghLive 2s ease-out infinite;
-    }
-    @keyframes ghLive{
-      0%{ box-shadow:0 0 0 0 rgba(34,197,94,.55); }
-      70%{ box-shadow:0 0 0 7px rgba(34,197,94,0); }
-      100%{ box-shadow:0 0 0 0 rgba(34,197,94,0); }
-    }
-    #gh-stat.bump{ animation:ghBump .6s ease; }
-    @keyframes ghBump{ 0%,100%{ transform:translateY(0) scale(1); } 40%{ transform:translateY(0) scale(1.12); } }
-    @media (max-width:640px){ #gh-stat{ right:1rem; bottom:4.5rem; font-size:.66rem; } }
-    @media (prefers-reduced-motion:reduce){
-      #gh-stat .gh-dot{ animation:none; } #gh-stat.bump{ animation:none; }
-    }
+    @media (max-width:640px){ #gh-stat{ right:1.25rem; bottom:4.25rem; font-size:1.2rem; } }
 
     /* Retrato ASCII en tonos de gris con cabeceo tipo Hermes */
     #portrait{ width:208px; height:208px; }
@@ -164,7 +147,7 @@
         <a href="#proyectos" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">Proyectos</a>
         <a href="#skills" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">Skills</a>
         <a href="/servicios" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">Servicios</a>
-        <a href="https://activaqr-production.up.railway.app/" target="_blank" rel="noopener" class="text-xs text-green-400 hover:text-green-300 transition-colors">ActivaQR ↗</a>
+        <a href="https://activaqr-production.up.railway.app/" target="_blank" rel="noopener" class="text-xs text-green-400 hover:text-green-300 transition-colors">ActivaQR</a>
         <a href="https://wa.me/5492804018359?text=Hola%20Jesús%2C%20vi%20tu%20portfolio%20y%20me%20gustaría%20contactarte."
            target="_blank" rel="noopener"
            class="group flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-300 text-xs font-medium hover:bg-cyan-500/15 transition-all">
@@ -196,7 +179,7 @@
         <a href="#skills" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Skills</a>
         <a href="#contacto" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Contacto</a>
         <a href="/servicios" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Servicios técnicos</a>
-        <a href="https://activaqr-production.up.railway.app/" target="_blank" rel="noopener" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-green-400 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">ActivaQR ↗</a>
+        <a href="https://activaqr-production.up.railway.app/" target="_blank" rel="noopener" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-green-400 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">ActivaQR</a>
         <a href="https://wa.me/5492804018359?text=Hola%20Jesús%2C%20vi%20tu%20portfolio%20y%20me%20gustaría%20contactarte." target="_blank" rel="noopener"
            class="mobile-link mt-1 py-2.5 px-3 rounded-lg text-sm font-medium text-center text-cyan-300 border border-cyan-500/30 bg-cyan-500/5 hover:bg-cyan-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Conversemos por WhatsApp</a>
       </div>
@@ -210,11 +193,10 @@
       <!-- GitHub activity heatmap — fondo en vivo -->
       <div id="gh-activity" aria-hidden="true"></div>
 
-      <!-- Contador en vivo de contribuciones reales de GitHub -->
+      <!-- Contador de contribuciones reales de GitHub (anotación a mano) -->
       <a id="gh-stat" href="https://github.com/jesus1942" target="_blank" rel="noopener"
-         class="group" aria-label="Actividad en GitHub en vivo">
-        <span class="gh-dot"></span>
-        <span><b id="gh-stat-num">—</b> contribuciones · último año en GitHub</span>
+         class="font-hand" aria-label="Actividad en GitHub">
+        <b id="gh-stat-num">—</b> contribuciones este último año en GitHub
       </a>
 
       <!-- Decorative hand-drawn stars -->
@@ -1275,12 +1257,8 @@
 
       function paintTotal(total) {
         if (!stat || !statNum || total == null) return;
-        const prev = parseInt(statNum.textContent.replace(/\D/g, ''), 10);
         statNum.textContent = total.toLocaleString('es-AR');
         stat.classList.add('is-ready');
-        if (!isNaN(prev) && total > prev) { // parpadeo si subió
-          stat.classList.remove('bump'); void stat.offsetWidth; stat.classList.add('bump');
-        }
       }
 
       // API pública con CORS — datos reales de jesus1942, sin token.

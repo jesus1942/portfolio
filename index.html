@@ -39,6 +39,36 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
+  <style>
+    /* GitHub activity heatmap — fondo en vivo del HERO */
+    #gh-activity{
+      position:absolute; inset:0; z-index:0; pointer-events:none;
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden; opacity:0; transition:opacity 1.2s ease;
+    }
+    #gh-activity.is-ready{ opacity:.85; }
+    #gh-activity .gh-grid{
+      display:grid; grid-auto-flow:column; grid-template-rows:repeat(7,1fr);
+      gap:4px; transform:translateX(14%) rotate(-8deg) scale(1.3);
+      /* foco a la derecha + difuminado para fundirse con el fondo y dejar legible el texto */
+      -webkit-mask-image:radial-gradient(95% 85% at 74% 48%, #000 30%, transparent 76%);
+              mask-image:radial-gradient(95% 85% at 74% 48%, #000 30%, transparent 76%);
+    }
+    #gh-activity .gh-cell{
+      width:12px; height:12px; border-radius:2.5px;
+      background:var(--c, rgba(255,255,255,.025));
+      opacity:0; animation:ghPop .5s ease forwards;
+    }
+    @keyframes ghPop{ from{opacity:0; transform:scale(.4)} to{opacity:1; transform:scale(1)} }
+    @media (max-width:640px){
+      #gh-activity .gh-cell{ width:9px; height:9px; border-radius:2px; }
+      #gh-activity .gh-grid{ gap:3px; transform:rotate(-8deg) scale(1.6); }
+    }
+    @media (prefers-reduced-motion:reduce){
+      #gh-activity{ transition:none; }
+      #gh-activity .gh-cell{ animation:none; opacity:1; }
+    }
+  </style>
 </head>
 <body class="antialiased">
 
@@ -114,6 +144,9 @@
 
     <!-- HERO -->
     <section class="min-h-screen flex flex-col justify-center px-6 pt-20 pb-16 relative overflow-hidden">
+      <!-- GitHub activity heatmap — fondo en vivo -->
+      <div id="gh-activity" aria-hidden="true"></div>
+
       <!-- Decorative hand-drawn stars -->
       <svg class="absolute top-32 left-[5%] md:left-[12%] w-5 h-5 md:w-8 md:h-8 text-cyan-500/20 md:text-cyan-500/25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
         <path d="M12 3 L12 9 M12 15 L12 21 M3 12 L9 12 M15 12 L21 12 M6 6 L9 9 M15 15 L18 18 M18 6 L15 9 M9 15 L6 18"/>
@@ -126,7 +159,7 @@
         <circle cx="10" cy="10" r="2.5"/>
       </svg>
 
-      <div class="max-w-5xl mx-auto w-full" style="animation: draw 0.7s ease-out both;">
+      <div class="max-w-5xl mx-auto w-full relative z-10" style="animation: draw 0.7s ease-out both;">
         <div class="grid md:grid-cols-[1fr_280px] gap-10 md:gap-16 items-center">
 
           <!-- TEXT SIDE -->
@@ -1131,6 +1164,47 @@
       });
     }, { threshold: 0.12, rootMargin: '-40px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // GitHub activity heatmap — fondo en vivo del HERO
+    (function () {
+      const host = document.getElementById('gh-activity');
+      if (!host) return;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches === false) { /* noop */ }
+
+      // Escala de color cyan según intensidad (0 = vacío)
+      const palette = [
+        'rgba(255,255,255,.025)',
+        'rgba(6,182,212,.22)',
+        'rgba(6,182,212,.42)',
+        'rgba(34,211,238,.62)',
+        'rgba(103,232,249,.85)'
+      ];
+
+      function render(days) {
+        if (!days || !days.length) return;
+        const grid = document.createElement('div');
+        grid.className = 'gh-grid';
+        days.forEach((d, i) => {
+          const cell = document.createElement('span');
+          cell.className = 'gh-cell';
+          cell.style.setProperty('--c', palette[Math.max(0, Math.min(4, d.level | 0))]);
+          cell.style.animationDelay = (i * 1.4) + 'ms';
+          grid.appendChild(cell);
+        });
+        host.replaceChildren(grid);
+        requestAnimationFrame(() => host.classList.add('is-ready'));
+      }
+
+      // API pública con CORS — datos reales de jesus1942, sin token.
+      fetch('https://github-contributions-api.jogruber.de/v4/jesus1942?y=last')
+        .then(r => r.ok ? r.json() : Promise.reject(r.status))
+        .then(data => {
+          const days = (data && data.contributions) ? data.contributions : [];
+          // últimos ~53 semanas (371 días) para llenar el ancho
+          render(days.slice(-371));
+        })
+        .catch(() => { /* sin red / API caída → el hero queda como antes */ });
+    })();
 
     // PWA service worker (network-first → siempre contenido fresco online)
     if ('serviceWorker' in navigator) {

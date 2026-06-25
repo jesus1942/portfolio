@@ -85,8 +85,8 @@
       margin:0; font-family:'JetBrains Mono', monospace; font-weight:500;
       line-height:1; letter-spacing:0; white-space:pre;
       background:transparent; color:#e5e7eb;
-      transform-origin:center 70%;
-      animation:headSway 7s ease-in-out infinite;
+      transform-origin:center 60%;
+      transform:perspective(700px); /* el giro lo controla JS siguiendo el cursor */
       will-change:transform;
       /* sutil halo cyan para integrarlo al tema */
       text-shadow:0 0 6px rgba(6,182,212,.18);
@@ -95,15 +95,6 @@
               mask-image:radial-gradient(70% 78% at 50% 46%, #000 60%, transparent 92%);
     }
     #ascii-face b{ font-weight:inherit; } /* spans de color por glifo */
-    @keyframes headSway{
-      0%,100%{ transform:perspective(700px) rotateY(-5deg) rotateZ(-1.1deg) translateY(0); }
-      25%    { transform:perspective(700px) rotateY(2deg)  rotateZ(.5deg)  translateY(-2px); }
-      50%    { transform:perspective(700px) rotateY(5deg)  rotateZ(1.1deg) translateY(.5px); }
-      75%    { transform:perspective(700px) rotateY(1deg)  rotateZ(-.4deg) translateY(-1px); }
-    }
-    @media (prefers-reduced-motion:reduce){
-      #ascii-face{ animation:none; }
-    }
   </style>
 </head>
 <body class="antialiased">
@@ -1280,8 +1271,46 @@
           }
           pre.innerHTML = html;
           requestAnimationFrame(() => portrait.classList.add('has-face'));
+          startHeadTracking(pre);
         })
         .catch(() => { /* sin retrato → queda el círculo decorativo */ });
+
+      // La cabeza sigue el cursor (estilo Hermes). Sin mouse o quieto → cabeceo suave.
+      function startHeadTracking(el) {
+        const reduce = window.matchMedia &&
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const MAX_Y = 20, MAX_X = 14; // grados de giro máx.
+        let tx = 0, ty = 0, cx = 0, cy = 0, last = 0;
+
+        function onMove(e) {
+          const p = (e.touches && e.touches[0]) || e;
+          const nx = (p.clientX / window.innerWidth) * 2 - 1;   // -1..1
+          const ny = (p.clientY / window.innerHeight) * 2 - 1;  // -1..1
+          tx = nx * MAX_Y;        // mira hacia el cursor en horizontal
+          ty = -ny * MAX_X;       // y en vertical
+          last = performance.now();
+        }
+        window.addEventListener('mousemove', onMove, { passive: true });
+        window.addEventListener('touchmove', onMove, { passive: true });
+
+        function frame(t) {
+          if (reduce) { el.style.transform = 'perspective(700px)'; return; }
+          // cabeceo de "respiración" cuando hace rato no se mueve el cursor
+          if (t - last > 2200) {
+            const s = t / 1000;
+            tx = Math.sin(s * 0.6) * 7;
+            ty = Math.cos(s * 0.5) * 4;
+          }
+          cx += (tx - cx) * 0.08;  // suavizado (lerp)
+          cy += (ty - cy) * 0.08;
+          const rz = (cx * 0.06).toFixed(2); // leve inclinación acompañando el giro
+          el.style.transform =
+            'perspective(700px) rotateY(' + cx.toFixed(2) + 'deg) rotateX(' +
+            cy.toFixed(2) + 'deg) rotateZ(' + rz + 'deg)';
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
     })();
 
     // PWA service worker (network-first → siempre contenido fresco online)

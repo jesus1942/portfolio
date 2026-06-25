@@ -75,6 +75,12 @@
       opacity:0; transition:opacity .9s ease; pointer-events:none;
       perspective:700px;
     }
+    /* spotlight oscuro detrás del retrato para separarlo del heatmap */
+    .ascii-wrap::before{
+      content:''; position:absolute; inset:-30%;
+      background:radial-gradient(closest-side,
+        rgba(3,5,8,.92), rgba(3,5,8,.6) 55%, transparent 78%);
+    }
     #portrait.has-face .ascii-wrap{ opacity:1; }
     /* al cargar la cara, se desvanece la decoración (anillos, nodos, cruz) */
     #portrait.has-face > svg,
@@ -84,12 +90,12 @@
     #ascii-face{
       margin:0; font-family:'JetBrains Mono', monospace; font-weight:500;
       line-height:1; letter-spacing:0; white-space:pre;
-      background:transparent; color:#e5e7eb;
+      background:transparent; color:#f4f4f5; position:relative;
       transform-origin:center 60%;
       transform:perspective(700px); /* el giro lo controla JS siguiendo el cursor */
       will-change:transform;
-      /* sutil halo cyan para integrarlo al tema */
-      text-shadow:0 0 6px rgba(6,182,212,.18);
+      /* halo cyan para integrarlo al tema y dar presencia sobre el heatmap */
+      text-shadow:0 0 7px rgba(6,182,212,.25);
       /* máscara ovalada para que el retrato se funda en los bordes */
       -webkit-mask-image:radial-gradient(70% 78% at 50% 46%, #000 60%, transparent 92%);
               mask-image:radial-gradient(70% 78% at 50% 46%, #000 60%, transparent 92%);
@@ -1254,7 +1260,7 @@
           // tamaño de fuente para que el retrato llene el círculo
           const box = portrait.clientWidth || 256;
           const cols = data.cols || lines[0].length;
-          const fs = Math.max(3, (box / cols) * 1.65);
+          const fs = Math.max(3, (box / cols) * 1.78);
           pre.style.fontSize = fs + 'px';
 
           // color en grises por glifo: glifo más denso → más claro
@@ -1264,7 +1270,7 @@
             for (const c of line) {
               if (c === ' ') { html += ' '; continue; }
               const idx = ramp.indexOf(c);
-              const g = Math.round(70 + (idx / maxIdx) * 175); // 70-245
+              const g = Math.round(95 + (idx / maxIdx) * 160); // 95-255
               html += '<b style="color:rgb(' + g + ',' + g + ',' + g + ')">' + c + '</b>';
             }
             html += '\n';

@@ -3,3 +3,5 @@
 gen-icons.mjs
 gen-og.mjs
 gen-flyer.mjs
+gen-ascii.mjs
+me-source.*

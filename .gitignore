@@ -6,3 +6,6 @@ node_modules/
 # Outputs generados por gen-flyer.mjs (material de difusión, no parte del sitio)
 flyer-*.pdf
 flyer-*.png
+
+# Foto fuente del retrato ASCII — NUNCA se publica (solo se publica el ASCII)
+me-source.*

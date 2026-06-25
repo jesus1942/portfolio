@@ -7,7 +7,8 @@
     "start": "node server.js",
     "build": "tailwindcss -i ./src/input.css -o ./styles.css --minify",
     "icons": "node gen-icons.mjs",
-    "og": "node gen-og.mjs"
+    "og": "node gen-og.mjs",
+    "ascii": "node gen-ascii.mjs me-source.jpg 90"
   },
   "dependencies": {
     "express": "^4.18.2"

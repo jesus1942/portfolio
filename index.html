@@ -80,6 +80,27 @@
     #gh-stat #gh-stat-num{ color:#67e8f9; font-weight:700; }
     @media (max-width:640px){ #gh-stat{ right:1.25rem; bottom:4.25rem; font-size:1.2rem; } }
 
+    /* Marquee de stack — discreto, en grises, se ilumina al hover */
+    .marquee{
+      position:relative; overflow:hidden;
+      -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+              mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .marquee-track{
+      display:flex; align-items:center; gap:2.75rem; width:max-content;
+      animation:stackScroll 55s linear infinite;
+    }
+    .marquee:hover .marquee-track{ animation-play-state:paused; }
+    .stack-item{ display:inline-flex; align-items:center; gap:.55rem; color:#52525b; transition:color .3s ease; }
+    .stack-item:hover{ color:#67e8f9; }
+    .stack-logo{
+      width:22px; height:22px; flex:0 0 auto; background:currentColor;
+      -webkit-mask:var(--i) center/contain no-repeat; mask:var(--i) center/contain no-repeat;
+    }
+    .stack-name{ font-size:.85rem; font-weight:500; letter-spacing:.2px; white-space:nowrap; }
+    @keyframes stackScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+    @media (prefers-reduced-motion:reduce){ .marquee-track{ animation:none; } }
+
     /* Retrato ASCII en tonos de gris con cabeceo tipo Hermes */
     #portrait{ width:208px; height:208px; }
     @media (min-width:768px){ #portrait{ width:320px; height:320px; } }
@@ -1165,6 +1186,14 @@
       </div>
     </section>
 
+    <!-- STACK — tecnologías que domino (marquee discreto) -->
+    <section id="stack" aria-label="Tecnologías que domino" class="py-14 px-4">
+      <p class="text-xs font-mono text-cyan-400 tracking-wider text-center mb-8">// stack que domino</p>
+      <div class="marquee">
+        <div class="marquee-track" id="stack-track" aria-hidden="true"></div>
+      </div>
+    </section>
+
   </main>
 
   <!-- FOOTER -->
@@ -1356,6 +1385,26 @@
         }
         requestAnimationFrame(frame);
       }
+    })();
+
+    // Stack que domino — marquee discreto (dos copias para loop continuo)
+    (function () {
+      const track = document.getElementById('stack-track');
+      if (!track) return;
+      const stack = [
+        ['notion','Notion'],['slack','Slack'],['gitlab','GitLab'],['github','GitHub'],
+        ['anthropic','Anthropic'],['grok','Grok'],['x','X'],['excel','Excel'],
+        ['powerbi','Power BI'],['linux','Linux'],['shell','Shell'],['bash','Bash'],
+        ['mongodb','MongoDB'],['docker','Docker'],['mysql','MySQL'],
+        ['railway','Railway'],['render','Render'],['replit','Replit'],['umami','Umami'],
+        ['react','React'],['vite','Vite'],['astro','Astro'],['typescript','TypeScript'],
+        ['javascript','JavaScript'],['python','Python'],['rust','Rust'],['cplusplus','C++']
+      ];
+      const build = () => stack.map(([f, n]) =>
+        '<span class="stack-item"><span class="stack-logo" style="--i:url(/icons/' + f +
+        '.svg)"></span><span class="stack-name">' + n + '</span></span>'
+      ).join('');
+      track.innerHTML = build() + build();
     })();
 
     // PWA service worker (network-first → siempre contenido fresco online)

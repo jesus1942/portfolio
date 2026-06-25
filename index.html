@@ -46,30 +46,60 @@
       display:flex; align-items:center; justify-content:center;
       overflow:hidden; opacity:0; transition:opacity 1.2s ease;
     }
-    #gh-activity.is-ready{ opacity:.85; }
+    #gh-activity.is-ready{ opacity:.9; }
     #gh-activity .gh-grid{
       display:grid; grid-auto-flow:column; grid-template-rows:repeat(7,1fr);
-      gap:4px; transform:translateX(14%) rotate(-8deg) scale(1.3);
+      gap:5px; transform:translateX(12%) rotate(-8deg) scale(1.55);
       /* foco a la derecha + difuminado para fundirse con el fondo y dejar legible el texto */
-      -webkit-mask-image:radial-gradient(95% 85% at 74% 48%, #000 30%, transparent 76%);
-              mask-image:radial-gradient(95% 85% at 74% 48%, #000 30%, transparent 76%);
+      -webkit-mask-image:radial-gradient(98% 88% at 74% 48%, #000 32%, transparent 78%);
+              mask-image:radial-gradient(98% 88% at 74% 48%, #000 32%, transparent 78%);
     }
     #gh-activity .gh-cell{
-      width:12px; height:12px; border-radius:2.5px;
+      width:15px; height:15px; border-radius:3px;
       background:var(--c, rgba(255,255,255,.025));
       opacity:0; animation:ghPop .5s ease forwards;
     }
     @keyframes ghPop{ from{opacity:0; transform:scale(.4)} to{opacity:1; transform:scale(1)} }
     @media (max-width:640px){
-      #gh-activity .gh-cell{ width:9px; height:9px; border-radius:2px; }
-      #gh-activity .gh-grid{ gap:3px; transform:rotate(-8deg) scale(1.6); }
+      #gh-activity .gh-cell{ width:11px; height:11px; border-radius:2.5px; }
+      #gh-activity .gh-grid{ gap:3.5px; transform:rotate(-8deg) scale(1.7); }
     }
     @media (prefers-reduced-motion:reduce){
       #gh-activity{ transition:none; }
       #gh-activity .gh-cell{ animation:none; opacity:1; }
     }
+    /* Contador en vivo de contribuciones */
+    #gh-stat{
+      position:absolute; right:1.5rem; bottom:5.5rem; z-index:10;
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.4rem .75rem; border-radius:9999px;
+      font-size:.72rem; color:#a1a1aa; text-decoration:none;
+      background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);
+      -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+      opacity:0; transform:translateY(6px); transition:opacity .8s ease, transform .8s ease, color .2s, border-color .2s;
+    }
+    #gh-stat.is-ready{ opacity:1; transform:translateY(0); }
+    #gh-stat:hover{ color:#e4e4e7; border-color:rgba(103,232,249,.35); }
+    #gh-stat #gh-stat-num{ color:#67e8f9; font-weight:700; }
+    #gh-stat .gh-dot{
+      width:7px; height:7px; border-radius:9999px; background:#22c55e;
+      box-shadow:0 0 0 0 rgba(34,197,94,.6); animation:ghLive 2s ease-out infinite;
+    }
+    @keyframes ghLive{
+      0%{ box-shadow:0 0 0 0 rgba(34,197,94,.55); }
+      70%{ box-shadow:0 0 0 7px rgba(34,197,94,0); }
+      100%{ box-shadow:0 0 0 0 rgba(34,197,94,0); }
+    }
+    #gh-stat.bump{ animation:ghBump .6s ease; }
+    @keyframes ghBump{ 0%,100%{ transform:translateY(0) scale(1); } 40%{ transform:translateY(0) scale(1.12); } }
+    @media (max-width:640px){ #gh-stat{ right:1rem; bottom:4.5rem; font-size:.66rem; } }
+    @media (prefers-reduced-motion:reduce){
+      #gh-stat .gh-dot{ animation:none; } #gh-stat.bump{ animation:none; }
+    }
 
     /* Retrato ASCII en tonos de gris con cabeceo tipo Hermes */
+    #portrait{ width:208px; height:208px; }
+    @media (min-width:768px){ #portrait{ width:320px; height:320px; } }
     .ascii-wrap{
       position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
       opacity:0; transition:opacity .9s ease; pointer-events:none;
@@ -180,6 +210,13 @@
       <!-- GitHub activity heatmap — fondo en vivo -->
       <div id="gh-activity" aria-hidden="true"></div>
 
+      <!-- Contador en vivo de contribuciones reales de GitHub -->
+      <a id="gh-stat" href="https://github.com/jesus1942" target="_blank" rel="noopener"
+         class="group" aria-label="Actividad en GitHub en vivo">
+        <span class="gh-dot"></span>
+        <span><b id="gh-stat-num">—</b> contribuciones · último año en GitHub</span>
+      </a>
+
       <!-- Decorative hand-drawn stars -->
       <svg class="absolute top-32 left-[5%] md:left-[12%] w-5 h-5 md:w-8 md:h-8 text-cyan-500/20 md:text-cyan-500/25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
         <path d="M12 3 L12 9 M12 15 L12 21 M3 12 L9 12 M15 12 L21 12 M6 6 L9 9 M15 15 L18 18 M18 6 L15 9 M9 15 L6 18"/>
@@ -193,7 +230,7 @@
       </svg>
 
       <div class="max-w-5xl mx-auto w-full relative z-10" style="animation: draw 0.7s ease-out both;">
-        <div class="grid md:grid-cols-[1fr_280px] gap-10 md:gap-16 items-center">
+        <div class="grid md:grid-cols-[1fr_340px] gap-10 md:gap-16 items-center">
 
           <!-- TEXT SIDE -->
           <div class="text-center md:text-left">
@@ -253,7 +290,7 @@
 
           <!-- CIRCLE SIDE — retrato ASCII en vivo (fallback: decorativo) -->
           <div class="flex items-center justify-center mt-6 md:mt-0">
-            <div id="portrait" class="relative w-40 h-40 md:w-64 md:h-64">
+            <div id="portrait" class="relative w-52 h-52 md:w-80 md:h-80">
 
               <!-- Anillo exterior — orgánico, líneas discontinuas -->
               <svg class="absolute inset-0 w-full h-full text-cyan-400/35" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"
@@ -1218,6 +1255,9 @@
         'rgba(103,232,249,.85)'
       ];
 
+      const stat = document.getElementById('gh-stat');
+      const statNum = document.getElementById('gh-stat-num');
+
       function render(days) {
         if (!days || !days.length) return;
         const grid = document.createElement('div');
@@ -1233,15 +1273,36 @@
         requestAnimationFrame(() => host.classList.add('is-ready'));
       }
 
+      function paintTotal(total) {
+        if (!stat || !statNum || total == null) return;
+        const prev = parseInt(statNum.textContent.replace(/\D/g, ''), 10);
+        statNum.textContent = total.toLocaleString('es-AR');
+        stat.classList.add('is-ready');
+        if (!isNaN(prev) && total > prev) { // parpadeo si subió
+          stat.classList.remove('bump'); void stat.offsetWidth; stat.classList.add('bump');
+        }
+      }
+
       // API pública con CORS — datos reales de jesus1942, sin token.
-      fetch('https://github-contributions-api.jogruber.de/v4/jesus1942?y=last')
-        .then(r => r.ok ? r.json() : Promise.reject(r.status))
-        .then(data => {
-          const days = (data && data.contributions) ? data.contributions : [];
-          // últimos ~53 semanas (371 días) para llenar el ancho
-          render(days.slice(-371));
-        })
-        .catch(() => { /* sin red / API caída → el hero queda como antes */ });
+      // cache:'no-store' → siempre trae tus contribuciones frescas de GitHub.
+      function load() {
+        return fetch('https://github-contributions-api.jogruber.de/v4/jesus1942?y=last',
+            { cache: 'no-store' })
+          .then(r => r.ok ? r.json() : Promise.reject(r.status))
+          .then(data => {
+            const days = (data && data.contributions) ? data.contributions : [];
+            render(days.slice(-371)); // últimas ~53 semanas para llenar el ancho
+            paintTotal(data && data.total ? data.total.lastYear : null);
+          })
+          .catch(() => { /* sin red / API caída → el hero queda como antes */ });
+      }
+
+      load();
+      // auto-refresco: un tab abierto se actualiza solo cuando suben tus commits
+      setInterval(load, 5 * 60 * 1000);
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') load();
+      });
     })();
 
     // Retrato ASCII en tonos de gris (Hermes-style) — datos en /ascii-face.json

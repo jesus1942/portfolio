@@ -23,7 +23,7 @@ PROYECTOS = {
     "activaqr": ("https://activaqr.net/", "screenshot-activaqr.webp", 1280, 730, 1000, 570, None),
     "buques":   ("https://jesus1942.github.io/visorPortuariaBuques/", "screenshot-buques.webp", 1280, 800, 1000, 625, ["esperar_datos", "clic:Cerrar"]),
     "modular":  ("https://jesus1942.github.io/ModularLive/", "screenshot-modular.webp", 1280, 800, 1000, 625, None),
-    "bible":    ("https://jesus1942.github.io/readBible/", "screenshot-bible.webp", 1280, 800, 1000, 625, ["clic:Continuar sin cuenta"]),
+    "bible":    ("https://jesus1942.github.io/readBible/", "screenshot-bible.webp", 1280, 800, 1000, 625, ["clic:Continuar sin cuenta", "clic:Cerrar"]),
     "bcra":     ("https://bcra-consultas-pwa-production.up.railway.app/", "screenshot-bcra.webp", 1280, 800, 1000, 625, None),
     "tarjetas": ("https://jesus1942.github.io/tarjetitas/", "screenshot-tarjetitas.webp", 1280, 800, 1000, 625, None),
     "tutti":    ("https://jesus1942.github.io/tutti-frutti/?backend=https://tutti-frutti-backend.onrender.com",

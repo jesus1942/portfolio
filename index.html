@@ -26,9 +26,9 @@
   <meta name="twitter:description" content="Del taller al código: soldadura, electricidad industrial y PLC + apps que resuelven problemas reales. Puerto Madryn, Patagonia." />
   <meta name="twitter:image" content="https://portfolio-production-1f23.up.railway.app/og-portfolio.png" />
 
-  <link rel="icon" type="image/png" href="/icon-512.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/png" href="icon-512.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.json" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -37,8 +37,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;700&family=Metal+Mania&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="3d.css" />
   <style>
     /* GitHub activity heatmap — fondo en vivo del HERO */
     #gh-activity{
@@ -153,11 +154,14 @@
     <div class="dot-grid absolute inset-0"></div>
   </div>
 
+  <!-- Escena 3D (WebGL) — la cámara recorre el sitio con el scroll -->
+  <div id="scene3d" aria-hidden="true"></div>
+
   <!-- NAV -->
   <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/5" style="background: rgba(3,5,8,0.85); backdrop-filter: blur(20px);">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
       <a href="#top" class="flex items-center gap-2.5">
-        <img src="/logo-isotipo.png" alt="Jesús Olguín" class="h-6 w-auto opacity-90" />
+        <img src="logo-isotipo.png" alt="Jesús Olguín" class="h-6 w-auto opacity-90" />
         <span class="font-mono text-sm text-zinc-400 tracking-wider">jesus<span class="text-cyan-400">.</span>olguin</span>
       </a>
 
@@ -167,8 +171,10 @@
         <a href="#recorrido" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">Recorrido</a>
         <a href="#proyectos" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">Proyectos</a>
         <a href="#skills" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">Skills</a>
-        <a href="/servicios" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">Servicios</a>
-        <a href="https://activaqr-production.up.railway.app/" target="_blank" rel="noopener" class="text-xs text-green-400 hover:text-green-300 transition-colors">ActivaQR</a>
+        <a href="#juego" class="text-xs text-red-400/90 hover:text-red-300 transition-colors focus-visible:outline-none">Juego</a>
+        <a href="cv.html" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">CV</a>
+        <a href="servicios.html" class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors focus-visible:text-cyan-400 focus-visible:outline-none">Servicios</a>
+        <a href="https://activaqr.net/" target="_blank" rel="noopener" class="text-xs text-green-400 hover:text-green-300 transition-colors">ActivaQR</a>
         <a href="https://wa.me/5492804018359?text=Hola%20Jesús%2C%20vi%20tu%20portfolio%20y%20me%20gustaría%20contactarte."
            target="_blank" rel="noopener"
            class="group flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-300 text-xs font-medium hover:bg-cyan-500/15 transition-all">
@@ -198,9 +204,11 @@
         <a href="#recorrido" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Recorrido</a>
         <a href="#proyectos" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Proyectos</a>
         <a href="#skills" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Skills</a>
+        <a href="#juego" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-red-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Juego · Fortaleza Roja</a>
+        <a href="cv.html" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Currículum</a>
         <a href="#contacto" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Contacto</a>
-        <a href="/servicios" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Servicios técnicos</a>
-        <a href="https://activaqr-production.up.railway.app/" target="_blank" rel="noopener" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-green-400 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">ActivaQR</a>
+        <a href="servicios.html" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-zinc-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Servicios técnicos</a>
+        <a href="https://activaqr.net/" target="_blank" rel="noopener" class="mobile-link py-2.5 px-3 rounded-lg text-sm text-green-400 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">ActivaQR</a>
         <a href="https://wa.me/5492804018359?text=Hola%20Jesús%2C%20vi%20tu%20portfolio%20y%20me%20gustaría%20contactarte." target="_blank" rel="noopener"
            class="mobile-link mt-1 py-2.5 px-3 rounded-lg text-sm font-medium text-center text-cyan-300 border border-cyan-500/30 bg-cyan-500/5 hover:bg-cyan-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">Conversemos por WhatsApp</a>
       </div>
@@ -278,6 +286,13 @@
                   <path d="M9 7 L4 12 L9 17 M15 7 L20 12 L15 17"/>
                 </svg>
                 Código
+              </a>
+              <a href="cv.html"
+                 class="group flex items-center gap-2 px-5 py-3 rounded-xl font-medium text-sm border border-cyan-500/30 bg-cyan-500/5 text-cyan-300 hover:bg-cyan-500/15 transition-all hover:scale-105">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 3 H14 L19 8 V20 Q19 21 18 21 H6 Q5 21 5 20 V4 Q5 3 6 3 Z M14 3 V8 H19 M8 12 H16 M8 15 H16 M8 18 H13"/>
+                </svg>
+                Ver CV
               </a>
               <a href="https://www.linkedin.com/in/jesus-narciso-olguin-7bb22020a"
                  target="_blank" rel="noopener"
@@ -564,7 +579,7 @@
             es una maqueta: es la herramienta que yo mismo hubiera querido tener en la obra.
           </p>
           <div class="mt-5 flex flex-wrap gap-3">
-            <a href="https://activaqr-production.up.railway.app/" target="_blank" rel="noopener"
+            <a href="https://activaqr.net/" target="_blank" rel="noopener"
                class="group inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border border-amber-500/30 bg-amber-500/5 text-amber-300 hover:bg-amber-500/10 transition-all">
               Ver ActivaQR en vivo
               <svg class="w-3.5 h-3.5 scribble-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -745,8 +760,9 @@
                 <h3 class="text-2xl font-bold text-white mb-2 hand-underline inline-block">Pool Installer</h3>
                 <p class="text-zinc-400 text-sm leading-relaxed mb-4">
                   Sistema integral de gestión para empresas instaladoras de piscinas de fibra de vidrio.
-                  Cálculo automático de materiales, gestión de proyectos, agenda de instalaciones,
-                  chat interno tipo Slack, portal de clientes con seguimiento en tiempo real y exports profesionales.
+                  Catálogo de 24 modelos ACQUAM, cálculo automático de materiales, excavación, plomería y electricidad,
+                  presupuestos y mano de obra en tiempo real, agenda de instalaciones, chat interno y
+                  portal de clientes con seguimiento de obra. Integraciones administradas por superadmin.
                 </p>
                 <div class="flex flex-wrap gap-1.5 mb-5">
                   <span class="tag tag-react">React</span>
@@ -784,7 +800,7 @@
                     <span class="w-2.5 h-2.5 rounded-full bg-green-400/60"></span>
                     <span class="ml-2 text-[10px] text-zinc-500 font-mono truncate">poolcalculator-production.up.railway.app</span>
                   </div>
-                  <img src="/screenshot-pool.webp" loading="lazy" decoding="async" width="1000" height="625"
+                  <img src="screenshot-pool.webp" loading="lazy" decoding="async" width="1000" height="625"
                        alt="Captura de Pool Installer — landing de cálculo de materiales para piscinas"
                        class="w-full block" />
                 </figure>
@@ -821,9 +837,10 @@
 
                 <h3 class="text-2xl font-bold text-white mb-2 hand-underline inline-block">ActivaQR</h3>
                 <p class="text-zinc-400 text-sm leading-relaxed mb-4">
-                  SaaS multi-empresa para gestión de activos industriales por QR. <span class="text-cyan-300">Online y abierta al público:</span>
-                  probás 30 días gratis y después te suscribís por Mercado Pago.
+                  SaaS multi-empresa para gestión de activos industriales por QR, ahora en dominio propio
+                  <span class="text-cyan-300">activaqr.net</span> con API dedicada. 30 días gratis, después suscripción por Mercado Pago.
                   Ficha pública sin login, mediciones desde el celular, alertas por parámetros fuera de rango y reportes.
+                  Próximo módulo: <span class="text-zinc-300">ActivaQR Control</span> — monitoreo conectado de temperaturas, puertas y alarmas.
                 </p>
                 <div class="flex flex-wrap gap-1.5 mb-5">
                   <span class="tag tag-react">React</span>
@@ -834,7 +851,7 @@
                   <span class="tag tag-pwa">PWA</span>
                 </div>
                 <div class="flex flex-wrap gap-3">
-                  <a href="https://activaqr-production.up.railway.app/#planes" target="_blank" rel="noopener"
+                  <a href="https://activaqr.net/#planes" target="_blank" rel="noopener"
                      class="group flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-all hover:scale-105"
                      style="background: linear-gradient(135deg, #0891b2, #0e7490)">
                     Ver planes y suscribirme
@@ -842,7 +859,7 @@
                       <path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/>
                     </svg>
                   </a>
-                  <a href="https://activaqr-production.up.railway.app/" target="_blank" rel="noopener"
+                  <a href="https://activaqr.net/" target="_blank" rel="noopener"
                      class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border border-cyan-500/30 bg-cyan-500/5 text-cyan-300 hover:bg-cyan-500/10 transition-all hover:scale-105">
                     Probar demo
                   </a>
@@ -863,9 +880,9 @@
                     <span class="w-2.5 h-2.5 rounded-full bg-red-400/60"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-yellow-400/60"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-green-400/60"></span>
-                    <span class="ml-2 text-[10px] text-zinc-500 font-mono truncate">activaqr-production.up.railway.app</span>
+                    <span class="ml-2 text-[10px] text-zinc-500 font-mono truncate">activaqr.net</span>
                   </div>
-                  <img src="/screenshot-activaqr.webp" loading="lazy" decoding="async" width="1000" height="570"
+                  <img src="screenshot-activaqr.webp" loading="lazy" decoding="async" width="1000" height="570"
                        alt="Captura de ActivaQR — landing de gestión de activos industriales por QR"
                        class="w-full block" />
                 </figure>
@@ -876,6 +893,72 @@
 
         <!-- Other projects grid -->
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+          <!-- Buques Puerto Madryn (nuevo) -->
+          <div class="reveal from-left glass glass-hover rounded-2xl p-5">
+            <svg viewBox="0 0 160 80" class="w-20 h-12 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 52 L118 52 L108 66 L32 66 Z"/>
+              <path d="M44 52 L44 34 L84 34 L84 52 M54 34 L54 24 L70 24 L70 34"/>
+              <path d="M90 52 L90 40 L104 40 L104 52"/>
+              <path d="M8 72 Q20 68 32 72 T56 72 T80 72 T104 72 T128 72 T152 72" stroke-dasharray="3 3"/>
+              <path d="M128 18 L128 52 M128 18 L146 26 L128 32"/>
+            </svg>
+            <div class="flex items-start justify-between mb-1">
+              <h3 class="font-bold text-white">Buques Puerto Madryn</h3>
+              <span class="px-2 py-0.5 rounded-full text-[10px] border border-green-500/30 bg-green-500/10 text-green-400">Nuevo · Live</span>
+            </div>
+            <p class="text-zinc-500 text-xs leading-relaxed mb-3">
+              PWA instalable para ver desde el celular los movimientos del puerto: buques amarrados, anunciados y zarpes.
+              Lee la planilla pública de la APPM directo desde el navegador, se refresca cada 10 minutos y funciona sin conexión.
+              Sin servidor ni base de datos.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tag tag-js">JavaScript</span>
+              <span class="tag tag-pwa">PWA offline</span>
+              <span class="tag tag-html">Datos abiertos</span>
+            </div>
+            <div class="flex gap-4">
+              <a href="https://jesus1942.github.io/visorPortuariaBuques/" target="_blank" rel="noopener"
+                 class="group inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 transition-colors font-medium">
+                Ver en vivo
+                <svg class="w-3.5 h-3.5 scribble-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/></svg>
+              </a>
+              <a href="https://github.com/jesus1942/visorPortuariaBuques" target="_blank" rel="noopener"
+                 class="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-cyan-400 transition-colors">GitHub</a>
+            </div>
+          </div>
+
+          <!-- ModularLive (nuevo) -->
+          <div class="reveal from-right glass glass-hover rounded-2xl p-5">
+            <svg viewBox="0 0 160 80" class="w-20 h-12 text-amber-400/70 mb-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M30 70 L30 36 L70 14 L110 36 L110 70 Z"/>
+              <path d="M30 36 L110 36 M50 70 L50 48 L66 48 L66 70 M80 48 L98 48 L98 60 L80 60 Z"/>
+              <path d="M122 70 L122 30 M118 30 L126 30 M118 70 L126 70 M122 30 L140 30 L140 70" stroke-dasharray="2 3"/>
+            </svg>
+            <div class="flex items-start justify-between mb-1">
+              <h3 class="font-bold text-white">ModularLive</h3>
+              <span class="px-2 py-0.5 rounded-full text-[10px] border border-green-500/30 bg-green-500/10 text-green-400">Live</span>
+            </div>
+            <p class="text-zinc-500 text-xs leading-relaxed mb-3">
+              Calculadora PWA de materiales para construcción modular: piso, muros, techo, aberturas y fijaciones,
+              con presets de vivienda, oficina y baño, merma configurable y exportación a CSV/JSON.
+              Motor de cálculo con tests (<span class="font-mono">node --test</span>).
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class="tag tag-js">JavaScript</span>
+              <span class="tag tag-pwa">PWA</span>
+              <span class="tag tag-node">Tests</span>
+            </div>
+            <div class="flex gap-4">
+              <a href="https://jesus1942.github.io/ModularLive/" target="_blank" rel="noopener"
+                 class="group inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 transition-colors font-medium">
+                Ver en vivo
+                <svg class="w-3.5 h-3.5 scribble-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/></svg>
+              </a>
+              <a href="https://github.com/jesus1942/ModularLive" target="_blank" rel="noopener"
+                 class="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-cyan-400 transition-colors">GitHub</a>
+            </div>
+          </div>
 
           <!-- Tracker de Contenedores Urbanos -->
           <div class="reveal from-left glass glass-hover rounded-2xl p-5">
@@ -915,25 +998,25 @@
           <div class="reveal from-right glass glass-hover rounded-2xl p-5">
             <!-- Screenshot real (mobile) -->
             <div class="rounded-lg overflow-hidden border border-white/10 mb-3">
-              <img src="/screenshot-bible.webp" loading="lazy" decoding="async" width="700" height="280"
-                   alt="Captura de BibleApp — lectura bíblica en el celular"
+              <img src="screenshot-bible.webp" loading="lazy" decoding="async" width="700" height="280"
+                   alt="Captura de Lectura Viva — lectura bíblica en el celular"
                    class="w-full h-32 object-cover object-top" />
             </div>
             <div class="flex items-start justify-between mb-1">
-              <h3 class="font-bold text-white">BibleApp</h3>
-              <span class="px-2 py-0.5 rounded-full text-[10px] border border-green-500/30 bg-green-500/10 text-green-400">Live</span>
+              <h3 class="font-bold text-white">Lectura Viva</h3>
+              <span class="px-2 py-0.5 rounded-full text-[10px] border border-green-500/30 bg-green-500/10 text-green-400">Live · Android/iOS</span>
             </div>
             <p class="text-zinc-500 text-xs leading-relaxed mb-3">
-              PWA de lectura bíblica sin distracciones. Versículo diario con temas (paz, esperanza, gratitud, fortaleza),
-              lectura por capítulos con resaltado táctil y modo inmersivo, notas y marcadores, recordatorios diarios y
-              comunidad por iglesia/eventos. Arquitectura híbrida: frontend en GitHub Pages, base de datos y backend en Railway.
-              Trazabilidad de uso real con Umami.
+              PWA de lectura bíblica offline (antes BibleApp), empaquetada para Android e iOS con Capacitor.
+              Login con Google, notas, marcadores, devocionales con racha y calendario, e iglesias aisladas entre sí
+              con sedes, eventos recurrentes, check-in geolocalizado y presencia en vivo.
+              Frontend en GitHub Pages, API Express + PostgreSQL en Railway.
             </p>
             <div class="flex flex-wrap gap-1.5 mb-4">
               <span class="tag tag-js">JavaScript</span>
               <span class="tag tag-pwa">PWA</span>
-              <span class="tag tag-postgres">Railway DB</span>
-              <span class="tag tag-railway">Umami</span>
+              <span class="tag tag-cap">Capacitor</span>
+              <span class="tag tag-postgres">PostgreSQL</span>
             </div>
             <div class="flex gap-4">
               <a href="https://jesus1942.github.io/readBible/" target="_blank" rel="noopener"
@@ -954,7 +1037,7 @@
           <div class="reveal from-left glass glass-hover rounded-2xl p-5">
             <!-- Screenshot real -->
             <div class="rounded-lg overflow-hidden border border-white/10 mb-3">
-              <img src="/screenshot-bcra.webp" loading="lazy" decoding="async" width="800" height="320"
+              <img src="screenshot-bcra.webp" loading="lazy" decoding="async" width="800" height="320"
                    alt="Captura de BCRA Consultas — central de deudores del BCRA"
                    class="w-full h-32 object-cover object-top" />
             </div>
@@ -1069,7 +1152,7 @@
           <div class="reveal from-right glass glass-hover rounded-2xl p-5">
             <!-- Screenshot real -->
             <div class="rounded-lg overflow-hidden border border-white/10 mb-3">
-              <img src="/screenshot-tutti.webp" loading="lazy" decoding="async" width="1000" height="400"
+              <img src="screenshot-tutti.webp" loading="lazy" decoding="async" width="1000" height="400"
                    alt="Captura de Tutti Frutti — juego de palabras multiplayer en tiempo real"
                    class="w-full h-32 object-cover object-top" />
             </div>
@@ -1078,7 +1161,8 @@
               <span class="px-2 py-0.5 rounded-full text-[10px] border border-orange-500/30 bg-orange-500/10 text-orange-400">Multiplayer</span>
             </div>
             <p class="text-zinc-500 text-xs leading-relaxed mb-3">
-              Juego de palabras en tiempo real multiplayer. Salas, puntuación, validación automática, chat y estadísticas.
+              Juego de palabras multiplayer en tiempo real: salas, rueda de letra con sorteo verificable,
+              mazos temáticos, rondas con giro, impugnaciones por votación, chat y estadísticas.
               Frontend en GitHub Pages y backend WebSocket con FastAPI en Render.
             </p>
             <div class="flex flex-wrap gap-1.5 mb-4">
@@ -1142,6 +1226,56 @@
             </a>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- JUEGO — Fortaleza Roja -->
+    <section id="juego" class="py-20 px-4" data-scene="juego">
+      <div class="max-w-6xl mx-auto">
+        <div class="reveal text-center mb-10">
+          <p class="text-xs font-mono tracking-wider mb-2" style="color:#ff8a2a">// modo juego</p>
+          <h2 class="text-3xl font-bold grad-white">
+            Hecho para <span class="font-hand text-3xl sm:text-4xl md:text-5xl leading-none" style="color:#ff6a3a">jugar</span>
+          </h2>
+        </div>
+
+        <div class="reveal from-scale fr-card tilt3d rounded-2xl overflow-hidden">
+          <div class="grid md:grid-cols-2 items-stretch">
+            <div class="p-6 sm:p-9 relative z-10">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="fr-chip">Nuevo</span>
+                <span class="fr-chip fr-chip--dim">FPS · Raycasting · 1 archivo</span>
+              </div>
+              <h3 class="fr-title">Fortaleza Roja</h3>
+              <p class="text-sm leading-relaxed mb-5" style="color:#d9cdb6">
+                Shooter retro en primera persona escrito desde cero sobre <span class="font-mono">&lt;canvas&gt;</span>:
+                motor de raycasting propio, mundo <b class="text-white">infinito y procedural</b> que se genera por bloques
+                a medida que avanzás, tres criaturas con IA distinta, pistola y escopeta, sonido sintetizado con Web Audio
+                y controles táctiles con joystick virtual. Sin librerías ni imágenes: todo se dibuja con código.
+              </p>
+              <ul class="fr-stats mb-6">
+                <li><b>∞</b><span>zonas procedurales</span></li>
+                <li><b>0</b><span>assets externos</span></li>
+                <li><b>3</b><span>tipos de enemigos</span></li>
+              </ul>
+              <div class="flex flex-wrap gap-3">
+                <button type="button" id="fr-play" class="fr-btn">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4 L20 12 L7 20 Z"/></svg>
+                  Entrar a la fortaleza
+                </button>
+                <a href="https://jesus1942.github.io/fortaleza-roja/" target="_blank" rel="noopener" class="fr-btn fr-btn--ghost">Abrir en pantalla completa</a>
+                <a href="https://github.com/jesus1942/fortaleza-roja" target="_blank" rel="noopener" class="fr-btn fr-btn--ghost">Código</a>
+              </div>
+              <p class="mt-4 text-[11px] font-mono" style="color:#8f7f72">WASD · mouse · clic dispara · M mapa — en el celular, joystick táctil</p>
+            </div>
+
+            <!-- Portal 3D: túnel de arcos en perspectiva real -->
+            <div class="fr-stage" aria-hidden="true">
+              <div class="fr-tunnel" id="fr-tunnel"></div>
+              <div class="fr-glow"></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1214,7 +1348,7 @@
   <!-- FOOTER -->
   <footer class="relative z-10 border-t border-white/5 py-8 px-4">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-600">
-      <span>© 2026 Jesús Olguín · Domotics &amp; IoT Solutions · <a href="/servicios" class="hover:text-cyan-400 transition-colors underline decoration-dotted underline-offset-2">Servicios técnicos</a></span>
+      <span>© 2026 Jesús Olguín · Domotics &amp; IoT Solutions · <a href="servicios.html" class="hover:text-cyan-400 transition-colors underline decoration-dotted underline-offset-2">Servicios técnicos</a></span>
       <span class="font-hand text-base text-zinc-500">
         Hecho en Puerto Madryn, Patagonia
       </span><svg class="inline-block ml-2 w-10 h-5 opacity-30" viewBox="0 0 40 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="color:#67e8f9">
@@ -1230,6 +1364,19 @@
       </a>
     </div>
   </footer>
+
+  <!-- Overlay del juego (se monta al entrar) -->
+  <div id="fr-overlay" class="fr-overlay" hidden>
+    <div class="fr-warp" id="fr-warp" aria-hidden="true"></div>
+    <div class="fr-frame-wrap">
+      <iframe id="fr-frame" title="Fortaleza Roja — juego" allow="fullscreen; autoplay; gamepad" loading="lazy"></iframe>
+    </div>
+    <button type="button" id="fr-close" class="fr-close" aria-label="Salir del juego">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+      Salir
+    </button>
+  </div>
+
 
   <script>
     // Mobile menu
@@ -1333,7 +1480,7 @@
       const portrait = document.getElementById('portrait');
       if (!pre || !portrait) return;
 
-      fetch('/ascii-face.json', { cache: 'no-cache' })
+      fetch('ascii-face.json', { cache: 'no-cache' })
         .then(r => r.ok ? r.json() : Promise.reject(r.status))
         .then(data => {
           const lines = data && data.lines;
@@ -1416,7 +1563,7 @@
         ['javascript','JavaScript'],['python','Python'],['rust','Rust'],['cplusplus','C++']
       ];
       const build = () => stack.map(([f, n]) =>
-        '<span class="stack-item"><span class="stack-logo" style="--i:url(/icons/' + f +
+        '<span class="stack-item"><span class="stack-logo" style="--i:url(icons/' + f +
         '.svg)"></span><span class="stack-name">' + n + '</span></span>'
       ).join('');
       track.innerHTML = build() + build();
@@ -1425,9 +1572,10 @@
     // PWA service worker (network-first → siempre contenido fresco online)
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
+        navigator.serviceWorker.register('sw.js').catch(() => {});
       });
     }
   </script>
+  <script type="module" src="3d.js"></script>
 </body>
 </html>

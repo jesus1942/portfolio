@@ -1,14 +1,14 @@
 // Service Worker — network-first (siempre contenido fresco online, cache como fallback offline)
-const CACHE = 'jo-portfolio-v1';
+const CACHE = 'jo-portfolio-v2';
 const CORE = [
-  '/',
-  '/servicios',
-  '/styles.css',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/apple-touch-icon.png',
-  '/logo-isotipo.png',
+  './',
+  'servicios.html',
+  'styles.css',
+  'manifest.json',
+  'icon-192.png',
+  'icon-512.png',
+  'apple-touch-icon.png',
+  'logo-isotipo.png',
 ];
 
 self.addEventListener('install', (event) => {
@@ -41,7 +41,7 @@ self.addEventListener('fetch', (event) => {
         return res;
       })
       .catch(() =>
-        caches.match(request).then((cached) => cached || caches.match('/'))
+        caches.match(request).then((cached) => cached || caches.match('./'))
       )
   );
 });

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currículum · Jesús Olguín</title>
+  <meta name="description" content="Currículum de Jesús Narciso Olguín — Full-Stack Developer & Soluciones IoT. Del taller al código: oficios industriales + apps en producción. Puerto Madryn, Chubut." />
+  <meta name="author" content="Jesús Olguín" />
+  <meta property="og:title" content="Currículum · Jesús Olguín" />
+  <meta property="og:description" content="Full-Stack Developer & Soluciones IoT. ActivaQR, Pool Installer, Lectura Viva y más. Puerto Madryn, Patagonia." />
+  <meta property="og:type" content="profile" />
+  <meta property="og:image" content="og-portfolio.png" />
+  <meta name="theme-color" content="#030508" />
+  <link rel="icon" type="image/png" href="icon-512.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#030508; --ink:#f4f4f5; --muted:#a1a1aa; --dim:#71717a; --line:rgba(255,255,255,.08);
+      --cyan:#22d3ee; --cyan-soft:#67e8f9; --amber:#fbbf24; --rust:#b8361e;
+      --sheet:rgba(12,16,22,.86);
+      color-scheme:dark;
+    }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font:15px/1.6 'Inter', system-ui, sans-serif; overflow-x:hidden;
+      background-image:radial-gradient(circle, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size:28px 28px;
+    }
+    a{ color:var(--cyan-soft); text-decoration:none; }
+    a:hover{ text-decoration:underline; text-underline-offset:3px; }
+    .mono{ font-family:'JetBrains Mono', monospace; }
+    .hand{ font-family:'Caveat', cursive; }
+
+    /* barra superior */
+    .bar{
+      position:sticky; top:0; z-index:20; display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:12px 16px; background:rgba(3,5,8,.85); backdrop-filter:blur(16px); border-bottom:1px solid var(--line);
+    }
+    .bar a.back{ display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-size:13px; }
+    .bar a.back:hover{ color:var(--cyan-soft); text-decoration:none; }
+    .bar .actions{ display:flex; gap:8px; }
+    .btn{
+      display:inline-flex; align-items:center; gap:8px; font:600 13px 'Inter', sans-serif; cursor:pointer;
+      padding:8px 14px; border-radius:10px; border:1px solid rgba(34,211,238,.35); background:rgba(34,211,238,.08); color:var(--cyan-soft);
+    }
+    .btn:hover{ background:rgba(34,211,238,.16); text-decoration:none; }
+    .btn:focus-visible, a:focus-visible{ outline:2px solid var(--cyan); outline-offset:3px; }
+    .btn.solid{ background:linear-gradient(135deg,#0891b2,#0e7490); color:#fff; border-color:transparent; }
+
+    /* escenario 3D */
+    .stage{ perspective:1800px; perspective-origin:50% 20%; padding:40px 16px 80px; }
+    .sheet{
+      max-width:900px; margin:0 auto; position:relative;
+      background:var(--sheet); border:1px solid var(--line); border-radius:20px;
+      box-shadow:0 50px 120px -40px rgba(6,182,212,.25), 0 0 0 1px rgba(255,255,255,.02) inset;
+      backdrop-filter:blur(10px);
+      transform-style:preserve-3d;
+      transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+      transition:transform .25s ease-out;
+      animation:sheetIn 1.3s cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes sheetIn{
+      from{ transform:translate3d(0,120px,-700px) rotateX(55deg); opacity:0; }
+      to  { transform:translate3d(0,0,0) rotateX(0); opacity:1; }
+    }
+    .sheet::before{ /* canto de la hoja: grosor real en 3D */
+      content:''; position:absolute; inset:0; border-radius:20px; transform:translateZ(-14px);
+      background:linear-gradient(180deg, rgba(34,211,238,.10), rgba(59,130,246,.06));
+      border:1px solid rgba(34,211,238,.12); pointer-events:none;
+    }
+
+    /* cabecera */
+    header.head{
+      display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center;
+      padding:36px 36px 28px; border-bottom:1px solid var(--line); transform:translateZ(30px);
+    }
+    .kicker{ font:500 11px 'JetBrains Mono', monospace; color:var(--cyan); letter-spacing:.14em; text-transform:uppercase; margin:0 0 8px; }
+    h1{ margin:0; font-size:clamp(32px, 6vw, 52px); line-height:1; letter-spacing:-.02em; font-weight:700; }
+    h1 .last{ background:linear-gradient(135deg,#67e8f9,#22d3ee,#06b6d4); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .role{ margin:10px 0 0; color:var(--muted); font-size:17px; font-weight:300; }
+    .role .hand{ font-size:24px; color:rgba(103,232,249,.85); }
+    .contact{ display:flex; flex-wrap:wrap; gap:6px 18px; margin:18px 0 0; padding:0; list-style:none; font-size:13px; color:var(--muted); }
+    .contact li{ display:inline-flex; align-items:center; gap:6px; }
+    .contact svg{ width:14px; height:14px; flex:none; }
+
+    /* cubo 3D */
+    .cube-wrap{ width:120px; height:120px; perspective:600px; }
+    .cube{ width:100%; height:100%; position:relative; transform-style:preserve-3d; animation:spin 14s linear infinite; }
+    .cube span{
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      font:600 30px 'JetBrains Mono', monospace; color:var(--cyan-soft);
+      border:1px solid rgba(103,232,249,.45); background:rgba(6,182,212,.07);
+      box-shadow:inset 0 0 30px rgba(6,182,212,.18);
+    }
+    .cube span:nth-child(1){ transform:translateZ(60px); }
+    .cube span:nth-child(2){ transform:rotateY(90deg) translateZ(60px); color:var(--amber); border-color:rgba(251,191,36,.45); background:rgba(251,191,36,.06); }
+    .cube span:nth-child(3){ transform:rotateY(180deg) translateZ(60px); }
+    .cube span:nth-child(4){ transform:rotateY(-90deg) translateZ(60px); color:#ff8a2a; border-color:rgba(184,54,30,.6); background:rgba(184,54,30,.1); }
+    .cube span:nth-child(5){ transform:rotateX(90deg) translateZ(60px); }
+    .cube span:nth-child(6){ transform:rotateX(-90deg) translateZ(60px); }
+    @keyframes spin{ from{ transform:rotateX(-18deg) rotateY(0); } to{ transform:rotateX(-18deg) rotateY(360deg); } }
+
+    /* cuerpo */
+    .body{ display:grid; grid-template-columns:minmax(0,1fr) 270px; gap:0; transform-style:preserve-3d; }
+    .main{ padding:28px 36px 36px; border-right:1px solid var(--line); transform-style:preserve-3d; }
+    .side{ padding:28px 26px 36px; transform-style:preserve-3d; }
+    h2{
+      font:500 11px 'JetBrains Mono', monospace; letter-spacing:.16em; text-transform:uppercase; color:var(--cyan);
+      margin:0 0 14px; display:flex; align-items:center; gap:10px;
+    }
+    h2::after{ content:''; flex:1; height:1px; background:var(--line); }
+    section.block{ margin:0 0 30px; }
+
+    /* bloques que giran como páginas al entrar */
+    .flip{
+      transform-origin:0% 50%;
+      transform:rotateY(-80deg) translateZ(-60px);
+      opacity:0;
+      transition:transform 1s cubic-bezier(.2,.9,.25,1), opacity .8s ease;
+      transition-delay:var(--d,0ms);
+      backface-visibility:hidden;
+    }
+    .side .flip{ transform-origin:100% 50%; transform:rotateY(80deg) translateZ(-60px); }
+    .flip.in{ transform:rotateY(0) translateZ(0); opacity:1; }
+
+    .lead{ color:#d4d4d8; margin:0 0 10px; }
+    .lead + p{ color:var(--muted); font-size:14px; margin:0; }
+
+    .job{ position:relative; padding:0 0 22px 22px; border-left:1px dashed rgba(103,232,249,.25); margin-left:5px; }
+    .job:last-child{ padding-bottom:4px; }
+    .job::before{ content:''; position:absolute; left:-6px; top:6px; width:11px; height:11px; border-radius:50%; background:var(--bg); border:2px solid var(--cyan); box-shadow:0 0 12px rgba(34,211,238,.5); }
+    .job.trade::before{ border-color:var(--amber); box-shadow:0 0 12px rgba(251,191,36,.4); }
+    .job .when{ font:500 12px 'JetBrains Mono', monospace; color:var(--dim); }
+    .job h3{ margin:2px 0 0; font-size:16px; font-weight:600; }
+    .job .org{ color:var(--cyan-soft); font-size:14px; }
+    .job.trade .org{ color:var(--amber); }
+    .job ul{ margin:8px 0 0; padding-left:18px; color:var(--muted); font-size:14px; }
+    .job li{ margin:3px 0; }
+    .job li b{ color:#e4e4e7; font-weight:600; }
+
+    .projects{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; transform-style:preserve-3d; }
+    .proj{
+      border:1px solid var(--line); border-radius:12px; padding:12px 14px; background:rgba(255,255,255,.02);
+      transition:transform .3s cubic-bezier(.2,.9,.25,1), border-color .3s;
+    }
+    .proj:hover{ transform:translateZ(26px) rotateX(4deg); border-color:rgba(103,232,249,.35); }
+    .proj .t{ display:flex; justify-content:space-between; gap:8px; align-items:baseline; }
+    .proj b{ font-size:14px; }
+    .proj .st{ font:500 10px 'JetBrains Mono', monospace; color:#4ade80; white-space:nowrap; }
+    .proj .st.code{ color:var(--dim); }
+    .proj .st.game{ color:#ff8a2a; }
+    .proj p{ margin:4px 0 0; color:var(--muted); font-size:12.5px; line-height:1.5; }
+    .proj .stack{ margin-top:6px; font:400 11px 'JetBrains Mono', monospace; color:var(--dim); }
+
+    .side h2{ color:var(--amber); }
+    .side h2.c{ color:var(--cyan); }
+    .chips{ display:flex; flex-wrap:wrap; gap:6px; list-style:none; margin:0; padding:0; }
+    .chips li{ font-size:12px; padding:3px 9px; border-radius:999px; border:1px solid var(--line); color:#d4d4d8; background:rgba(255,255,255,.03); }
+    .side dl{ margin:0; }
+    .side dt{ font-size:14px; font-weight:600; color:#e4e4e7; }
+    .side dd{ margin:0 0 12px; font-size:13px; color:var(--muted); }
+    .side dd .mono{ font-size:11px; color:var(--dim); }
+    .skill-group{ margin:0 0 14px; }
+    .skill-group p{ margin:0 0 6px; font:500 10px 'JetBrains Mono', monospace; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); }
+    .quote{ font-family:'Caveat', cursive; font-size:22px; line-height:1.2; color:rgba(251,191,36,.9); margin:0; }
+
+    footer.foot{ padding:16px 36px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; font-size:12px; color:var(--dim); transform:translateZ(16px); }
+
+    /* transición 3D real entre páginas (View Transitions entre documentos) */
+    @view-transition{ navigation:auto; }
+    ::view-transition-old(root){ animation:vtOut .65s cubic-bezier(.65,0,.35,1) both; transform-origin:0% 50%; }
+    ::view-transition-new(root){ animation:vtIn .65s cubic-bezier(.65,0,.35,1) both; transform-origin:100% 50%; }
+    @keyframes vtOut{ to{ transform:perspective(1400px) translateZ(-380px) rotateY(-62deg); opacity:0; } }
+    @keyframes vtIn{ from{ transform:perspective(1400px) translateZ(-380px) rotateY(62deg); opacity:0; } }
+
+    @media (max-width:760px){
+      header.head{ grid-template-columns:1fr; padding:26px 20px 22px; }
+      .cube-wrap{ display:none; }
+      .body{ grid-template-columns:1fr; }
+      .main{ border-right:0; border-bottom:1px solid var(--line); padding:22px 20px; }
+      .side{ padding:22px 20px 26px; }
+      .projects{ grid-template-columns:1fr; }
+      footer.foot{ padding:14px 20px; }
+      .stage{ padding:20px 10px 60px; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .sheet{ animation:none; transform:none !important; }
+      .flip{ transform:none !important; opacity:1 !important; transition:none; }
+      .cube{ animation:none; transform:rotateX(-18deg) rotateY(-30deg); }
+      .proj:hover{ transform:none; }
+      ::view-transition-old(root), ::view-transition-new(root){ animation:none; }
+    }
+
+    /* impresión / PDF: hoja A4 blanca, sin 3D */
+    @media print{
+      @page{ size:A4; margin:12mm; }
+      :root{ --ink:#111; --muted:#333; --dim:#555; --line:#ddd; --cyan:#0e7490; --cyan-soft:#0e7490; --amber:#92400e; }
+      body{ background:#fff; color:#111; font-size:11.5px; }
+      .bar, .cube-wrap{ display:none !important; }
+      .stage{ padding:0; perspective:none; }
+      .sheet{ animation:none; transform:none !important; box-shadow:none; border:0; background:#fff; backdrop-filter:none; max-width:none; }
+      .sheet::before{ display:none; }
+      header.head, footer.foot{ transform:none; padding:0 0 12px; }
+      .flip{ transform:none !important; opacity:1 !important; }
+      .main{ padding:12px 14px 0 0; }
+      .side{ padding:12px 0 0 14px; }
+      h1 .last{ -webkit-text-fill-color:#0e7490; color:#0e7490; }
+      .job::before{ background:#fff; box-shadow:none; }
+      .proj{ break-inside:avoid; background:#fff; }
+      .job{ break-inside:avoid; }
+      .chips li{ color:#222; background:#fff; }
+      a{ color:#0e7490; }
+      .lead{ color:#111; }
+      .job li b, .side dt{ color:#111; }
+      .proj .st{ color:#166534; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bar">
+    <a class="back" href="./#top">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12 H5 M10 7 L5 12 L10 17"/></svg>
+      Volver al portfolio
+    </a>
+    <div class="actions">
+      <a class="btn" href="https://wa.me/5492804018359?text=Hola%20Jes%C3%BAs%2C%20vi%20tu%20CV." target="_blank" rel="noopener">WhatsApp</a>
+      <button class="btn solid" type="button" id="print">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 V15 M7 10 L12 15 L17 10 M5 20 H19"/></svg>
+        Descargar PDF
+      </button>
+    </div>
+  </div>
+
+  <div class="stage">
+    <article class="sheet" id="sheet">
+
+      <header class="head">
+        <div>
+          <p class="kicker">Currículum · actualizado octubre 2026</p>
+          <h1>Jesús Narciso <span class="last">Olguín</span></h1>
+          <p class="role">Full-Stack Developer <span class="hand">&amp;</span> Soluciones IoT</p>
+          <ul class="contact">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21 Q5 14 5 10 Q5 5 9 4 Q13 3 16 5 Q19 7 19 10 Q19 14 12 21 Z"/><circle cx="12" cy="10" r="2.5"/></svg>Puerto Madryn, Chubut, Argentina</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6 Q4 4 6 4 H18 Q20 4 20 6 V14 Q20 16 18 16 H10 L6 19.5 V16 H6 Q4 16 4 14 Z"/></svg><a href="https://wa.me/5492804018359" target="_blank" rel="noopener">+54 9 280 401-8359</a></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 L12 13 L21 7"/></svg><a href="mailto:chucky9425@gmail.com">chucky9425@gmail.com</a></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7 L4 12 L9 17 M15 7 L20 12 L15 17"/></svg><a href="https://github.com/jesus1942" target="_blank" rel="noopener">github.com/jesus1942</a></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 11 V16 M8 8 V8.01 M12 16 V11 M12 13 Q12 11 14 11 Q16 11 16 13 V16"/></svg><a href="https://www.linkedin.com/in/jesus-narciso-olguin-7bb22020a" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+        <div class="cube-wrap" aria-hidden="true">
+          <div class="cube"><span>JO</span><span>⚡</span><span>&lt;/&gt;</span><span>▲</span><span>IoT</span><span>∞</span></div>
+        </div>
+      </header>
+
+      <div class="body">
+        <div class="main">
+
+          <section class="block flip">
+            <h2>Perfil</h2>
+            <p class="lead">
+              Desarrollador full-stack que viene del taller. Años de soldadura, electricidad industrial, PLC,
+              operación de planta en minería y reparaciones navales, convertidos en software que resuelve
+              problemas que conozco de primera mano.
+            </p>
+            <p>
+              Diseño, construyo y pongo en producción aplicaciones completas — desde el modelo de datos y la API
+              hasta la PWA instalable en el celular — y las conecto con el mundo físico cuando hace falta:
+              domótica, sensores, relés y controladores. Resolutivo, autodidacta y acostumbrado a trabajar seguro,
+              con foco en que la herramienta funcione de verdad en la obra o en la planta.
+            </p>
+          </section>
+
+          <section class="block flip">
+            <h2>Experiencia</h2>
+
+            <div class="job">
+              <span class="when">2021 — actualidad</span>
+              <h3>Desarrollador Full-Stack &amp; Soluciones IoT</h3>
+              <span class="org">Independiente · Domotics &amp; IoT Solutions</span>
+              <ul>
+                <li><b>ActivaQR</b> — SaaS multi-empresa en producción para gestión de activos industriales por QR, con dominio propio, API dedicada y suscripción por Mercado Pago.</li>
+                <li><b>Pool Installer</b> — sistema de gestión para instaladores de piscinas de fibra: cálculo de materiales, presupuestos, agenda y portal de clientes.</li>
+                <li><b>Lectura Viva</b> — PWA + apps Android/iOS (Capacitor) con login Google, devocionales e iglesias con eventos y check-in geolocalizado.</li>
+                <li>PWAs de datos públicos (<b>Buques Puerto Madryn</b>, <b>BCRA Consultas</b>), herramientas de cálculo (<b>ModularLive</b>) y juegos (<b>Tutti Frutti</b>, <b>Fortaleza Roja</b>).</li>
+                <li>Automatismos a medida con ESP32, relés y WiFi; despliegues en Railway, Render y GitHub Pages con CI en GitHub Actions.</li>
+              </ul>
+            </div>
+
+            <div class="job trade">
+              <span class="when">2018 — 2022</span>
+              <h3>Operador de planta de recuperación de agua y relleno hidráulico</h3>
+              <span class="org">Minera Santa Cruz</span>
+              <ul>
+                <li>Operación de equipos en sala de control y en campo.</li>
+                <li>Gestión de riesgos y planificación de sistemas seguros en operaciones y logística.</li>
+                <li>Operación de equipos de perforación subterránea; capacitación y planificación de tareas.</li>
+              </ul>
+            </div>
+
+            <div class="job trade">
+              <span class="when">2014 — 2018</span>
+              <h3>Montador e instalador electricista</h3>
+              <span class="org">Independiente</span>
+              <ul>
+                <li>Instalaciones eléctricas domiciliarias e industriales, sistemas de seguridad y domótica.</li>
+                <li>Montaje y puesta en marcha de una compactadora de residuos para la Municipalidad de Perito Moreno (Santa Cruz).</li>
+              </ul>
+            </div>
+
+            <div class="job trade">
+              <span class="when">Experiencia en oficios</span>
+              <h3>Metalmecánica, montaje y naval</h3>
+              <span class="org">Metalpat · INFA S.A. · astilleros</span>
+              <ul>
+                <li>Fabricación de tanques de acero inoxidable, reparación estructural y redes de tuberías (Metalpat).</li>
+                <li>Ayudante de instrumentista, conexionado de puentes grúa, montaje y soldadura en planta Aluar (INFA S.A.).</li>
+                <li>Reparación de cascos, estructuras de cubierta y tuberías a bordo.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="block flip">
+            <h2>Proyectos destacados</h2>
+            <div class="projects">
+              <div class="proj"><div class="t"><b>ActivaQR</b><span class="st">● en producción</span></div><p>Activos industriales por QR: ficha pública, mediciones, alertas y reportes.</p><div class="stack">React · TS · Node · Prisma · PostgreSQL</div></div>
+              <div class="proj"><div class="t"><b>Pool Installer</b><span class="st">● en producción</span></div><p>Materiales, excavación, plomería y presupuestos para 24 modelos de piscinas.</p><div class="stack">React · TS · Node · Prisma · Railway</div></div>
+              <div class="proj"><div class="t"><b>Lectura Viva</b><span class="st">● web · Android · iOS</span></div><p>Lectura offline, devocionales y comunidad de iglesias con presencia en vivo.</p><div class="stack">JS · Capacitor · Express · PostgreSQL</div></div>
+              <div class="proj"><div class="t"><b>Buques Puerto Madryn</b><span class="st">● nuevo</span></div><p>Movimientos del puerto en vivo desde datos abiertos de la APPM, offline.</p><div class="stack">JS · PWA · Service Worker</div></div>
+              <div class="proj"><div class="t"><b>Fortaleza Roja</b><span class="st game">▲ jugable</span></div><p>FPS por raycasting propio, mundo infinito procedural y audio sintetizado.</p><div class="stack">Canvas · Web Audio · JS puro</div></div>
+              <div class="proj"><div class="t"><b>Tutti Frutti</b><span class="st">● multiplayer</span></div><p>Juego de palabras en tiempo real con salas, votaciones y chat.</p><div class="stack">Python · FastAPI · WebSockets</div></div>
+              <div class="proj"><div class="t"><b>BCRA Consultas</b><span class="st">● live</span></div><p>Central de Deudores del BCRA desde el celular, con proxy propio.</p><div class="stack">React · TS · Vite · Node</div></div>
+              <div class="proj"><div class="t"><b>ModularLive</b><span class="st">● live</span></div><p>Materiales para construcción modular con exportación CSV/JSON y tests.</p><div class="stack">JS · PWA · node --test</div></div>
+            </div>
+          </section>
+
+        </div>
+
+        <aside class="side">
+          <section class="block flip" style="--d:120ms">
+            <h2 class="c">Stack</h2>
+            <div class="skill-group"><p>Frontend</p><ul class="chips"><li>React</li><li>TypeScript</li><li>Astro</li><li>Tailwind</li><li>Vite</li><li>PWA</li><li>Canvas / WebGL</li></ul></div>
+            <div class="skill-group"><p>Backend</p><ul class="chips"><li>Node / Express</li><li>Python / FastAPI</li><li>Prisma</li><li>WebSockets</li><li>REST</li></ul></div>
+            <div class="skill-group"><p>Datos &amp; infra</p><ul class="chips"><li>PostgreSQL</li><li>Railway</li><li>Docker</li><li>GitHub Actions</li><li>Linux</li></ul></div>
+            <div class="skill-group"><p>IoT &amp; móvil</p><ul class="chips"><li>ESP32 / 8266</li><li>Arduino</li><li>MQTT</li><li>Capacitor</li><li>QR / NFC</li><li>Fibaro</li></ul></div>
+          </section>
+
+          <section class="block flip" style="--d:220ms">
+            <h2>Oficios</h2>
+            <ul class="chips">
+              <li>Soldadura · 5 procesos</li><li>Tableros industriales</li><li>PLC y automatismos</li><li>Interpretación de planos</li><li>Operación de planta</li><li>Trabajo seguro</li>
+            </ul>
+          </section>
+
+          <section class="block flip" style="--d:320ms">
+            <h2 class="c">Formación</h2>
+            <dl>
+              <dt>Desarrollo Web Full-Stack</dt><dd>Soy Henry · <span class="mono">2021</span></dd>
+              <dt>PLC y Electricidad Industrial</dt><dd>IPET Puerto Madryn · <span class="mono">2021</span></dd>
+              <dt>Inglés técnico</dt><dd>Instituto Shamrock, Puerto Madryn</dd>
+              <dt>Instalador certificado y re-seller</dt><dd>Domótica FIBARO</dd>
+            </dl>
+          </section>
+
+          <section class="block flip" style="--d:420ms">
+            <h2 class="c">Idiomas</h2>
+            <dl><dt>Español</dt><dd>Nativo</dd><dt>Inglés</dt><dd>Técnico</dd></dl>
+          </section>
+
+          <section class="block flip" style="--d:520ms">
+            <p class="quote">“Lo que entrego no es una maqueta: es la herramienta que yo mismo hubiera querido tener en la obra.”</p>
+          </section>
+        </aside>
+      </div>
+
+      <footer class="foot">
+        <span>Jesús Olguín · Domotics &amp; IoT Solutions</span>
+        <span>Portfolio: <a href="./">jesus1942.github.io/portfolio</a></span>
+      </footer>
+    </article>
+  </div>
+
+  <script>
+    (function () {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // bloques que giran como páginas al entrar en pantalla
+      var flips = document.querySelectorAll('.flip');
+      if (reduce || !('IntersectionObserver' in window)) {
+        flips.forEach(function (f) { f.classList.add('in'); });
+      } else {
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        flips.forEach(function (f) { io.observe(f); });
+      }
+
+      // la hoja se inclina siguiendo el puntero (después de la entrada)
+      var sheet = document.getElementById('sheet');
+      if (!reduce && sheet) {
+        sheet.addEventListener('animationend', function () {
+          sheet.style.animation = 'none';
+          window.addEventListener('pointermove', function (e) {
+            if (e.pointerType === 'touch') return;
+            var nx = e.clientX / window.innerWidth - 0.5, ny = e.clientY / window.innerHeight - 0.5;
+            sheet.style.setProperty('--ry', (nx * 5).toFixed(2) + 'deg');
+            sheet.style.setProperty('--rx', (-ny * 3.5).toFixed(2) + 'deg');
+          }, { passive: true });
+        });
+      }
+
+      // imprimir / guardar como PDF: todo visible y plano
+      document.getElementById('print').addEventListener('click', function () {
+        flips.forEach(function (f) { f.classList.add('in'); });
+        window.print();
+      });
+      window.addEventListener('beforeprint', function () { flips.forEach(function (f) { f.classList.add('in'); }); });
+    })();
+  </script>
+</body>
+</html>

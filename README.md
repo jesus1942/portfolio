@@ -3,7 +3,8 @@
 Sitio personal de Jesús Olguín — Full-Stack Developer & IoT Solutions, con una segunda
 landing de servicios técnicos (calefacción, piscinas, electricidad industrial, etc.).
 
-Sitio estático servido con Express, desplegado en Railway.
+Sitio estático servido con Express, desplegado en Railway, y publicado también en
+GitHub Pages: https://jesus1942.github.io/portfolio/
 
 ## Estructura
 
@@ -52,3 +53,19 @@ npm start
 - Auto Deploy activado: cada push a `main` redespliega.
 - Build: Nixpacks detecta `package.json` → `npm install` → `npm start`.
 - `.railwayignore` excluye `*.md`, `.git` y `gen-icons.mjs` del deploy.
+
+## Capa 3D
+
+- `3d.js` + `3d.css`: escena WebGL (Three.js desde CDN) donde la cámara vuela por un
+  recorrido 3D atado al scroll, con una pieza por sección; secciones que entran y salen
+  inclinándose en perspectiva; tarjetas con tilt 3D; transición 3D entre páginas
+  (View Transitions). Todo se desactiva con `prefers-reduced-motion`.
+- Sección **Juego**: Fortaleza Roja (repo `jesus1942/fortaleza-roja`) embebida con un
+  portal 3D. `#jugar` en la URL abre el juego directo.
+- `cv.html`: currículum con entrada 3D, bloques que giran como páginas y versión
+  imprimible (botón "Descargar PDF").
+
+## GitHub Pages
+
+`.github/workflows/pages.yml` arma `_site/` solo con los archivos públicos y publica
+en cada push a `main`. Las rutas del sitio son relativas para funcionar en ambos hosts.

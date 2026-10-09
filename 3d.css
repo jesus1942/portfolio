@@ -194,3 +194,12 @@ body.fr-lock{ overflow:hidden; }
 @media (prefers-reduced-motion: reduce){
   ::view-transition-old(root), ::view-transition-new(root){ animation:none; }
 }
+
+/* Agenda: dos capturas apiladas en 3D (plataforma adelante, negocio atrás) */
+.agenda-shots{ position:relative; perspective:1200px; padding:0 0 34px 34px; transform-style:preserve-3d; }
+.agenda-shot{ position:relative; transition:transform .5s cubic-bezier(.2,.9,.25,1); background:rgba(3,5,8,.92); }
+.agenda-shot--back{ position:absolute; left:0; top:34px; right:34px; transform:translateZ(-60px) rotateY(8deg); opacity:.75; }
+.agenda-shots .agenda-shot:not(.agenda-shot--back){ transform:translateZ(0) rotateY(-4deg); }
+.glass-hover:hover .agenda-shot--back{ transform:translate3d(-14px,10px,-40px) rotateY(10deg); opacity:.95; }
+.glass-hover:hover .agenda-shots .agenda-shot:not(.agenda-shot--back){ transform:translate3d(10px,-8px,30px) rotateY(-6deg); }
+@media (prefers-reduced-motion: reduce){ .agenda-shot, .agenda-shot--back{ transform:none !important; transition:none; } }

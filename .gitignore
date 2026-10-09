@@ -9,3 +9,4 @@ flyer-*.png
 
 # Foto fuente del retrato ASCII — NUNCA se publica (solo se publica el ASCII)
 me-source.*
+scripts/__pycache__/

@@ -24,6 +24,8 @@ PROYECTOS = {
     "buques":   ("https://jesus1942.github.io/visorPortuariaBuques/", "screenshot-buques.webp", 1280, 800, 1000, 625, ["esperar_datos", "clic:Cerrar"]),
     "modular":  ("https://jesus1942.github.io/ModularLive/", "screenshot-modular.webp", 1280, 800, 1000, 625, None),
     "bible":    ("https://jesus1942.github.io/readBible/", "screenshot-bible.webp", 1280, 800, 1000, 625, ["clic:Continuar sin cuenta", "clic:Cerrar"]),
+    "agenda":   ("https://jesus1942.github.io/natalia-natalia-Agenda-de-turnos/plataforma", "screenshot-agenda.webp", 1280, 800, 1000, 625, None),
+    "agenda-negocio": ("https://jesus1942.github.io/natalia-natalia-Agenda-de-turnos/", "screenshot-agenda-negocio.webp", 1280, 800, 1000, 625, None),
     "bcra":     ("https://bcra-consultas-pwa-production.up.railway.app/", "screenshot-bcra.webp", 1280, 800, 1000, 625, None),
     "tarjetas": ("https://jesus1942.github.io/tarjetitas/", "screenshot-tarjetitas.webp", 1280, 800, 1000, 625, None),
     "tutti":    ("https://jesus1942.github.io/tutti-frutti/?backend=https://tutti-frutti-backend.onrender.com",
@@ -34,30 +36,39 @@ PROYECTOS = {
 
 async def clic_texto(page, texto):
     """Hace clic en un botón/enlace visible con ese texto (si existe): cierra avisos, entra como invitado, etc."""
-    loc = page.get_by_text(texto, exact=False)
+    # solo botones o enlaces visibles: hay páginas con el mismo texto en elementos ocultos
+    loc = page.locator("button:visible, a:visible, [role=button]:visible").filter(has_text=texto)
     try:
         if await loc.count():
-            await loc.first.click(timeout=4000)
+            await loc.last.click(timeout=4000)   # el último suele ser el del modal que está encima
             await page.wait_for_timeout(1500)
     except Exception:
         pass
 
 
 async def mejor_vista(page):
-    """Fortaleza Roja genera un mundo distinto en cada partida. Gira en el lugar y se queda
-    con el ángulo que muestra más profundidad (centro más oscuro por la niebla = pasillo largo),
-    para no terminar mirando una pared."""
-    mejor, puntaje = None, None
-    for _ in range(10):
+    """Fortaleza Roja genera un mundo distinto en cada partida. Gira en el lugar y se queda con
+    el ángulo de más detalle (mayor contraste en la vista 3D): paredes con textura y profundidad,
+    no una pared pegada ni un pasillo perdido en la niebla."""
+    from PIL import ImageStat
+    mejor, puntaje = None, -1
+    for _ in range(12):
         png = await page.screenshot(type="png")
         img = Image.open(io.BytesIO(png)).convert("L")
         w, h = img.size
-        centro = img.crop((int(w * .38), int(h * .25), int(w * .62), int(h * .55)))
-        brillo = sum(centro.getdata()) / (centro.width * centro.height)
-        if 4 < brillo and (puntaje is None or brillo < puntaje):
-            mejor, puntaje = png, brillo
+        vista = img.crop((int(w * .1), int(h * .05), int(w * .9), int(h * .62)))  # sin arma ni HUD
+        centro = img.crop((int(w * .44), int(h * .28), int(w * .56), int(h * .48)))
+        lados = [img.crop((int(w * .1), int(h * .15), int(w * .3), int(h * .6))),
+                 img.crop((int(w * .7), int(h * .15), int(w * .9), int(h * .6)))]
+        oscuro = sum(1 for p in centro.getdata() if p < 28) / (centro.width * centro.height)
+        detalle = max(ImageStat.Stat(l).stddev[0] for l in lados)
+        media = ImageStat.Stat(vista).mean[0]
+        # pasillo: centro que se pierde en la niebla + al menos un costado con pared texturada
+        score = detalle * (1.0 if .25 < oscuro < .95 else .35) * (1.0 if media > 12 else .2)
+        if score > puntaje:
+            mejor, puntaje = png, score
         await page.keyboard.down("KeyE")
-        await page.wait_for_timeout(240)
+        await page.wait_for_timeout(200)
         await page.keyboard.up("KeyE")
         await page.wait_for_timeout(250)
     return mejor

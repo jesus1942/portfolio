@@ -114,6 +114,13 @@ main > section.s3d.is-idle{ transform:none; opacity:1; }
   border-left:1px solid rgba(184,54,30,.25);
 }
 .fr-tunnel{ position:absolute; inset:0; transform-style:preserve-3d; }
+/* captura real del juego, al fondo del túnel */
+.fr-shot{
+  position:absolute; left:50%; top:50%; width:72%; height:auto; transform:translate(-50%,-50%);
+  border:2px solid rgba(184,54,30,.55); box-shadow:0 0 0 6px rgba(11,6,6,.8), 0 0 60px rgba(255,90,30,.35);
+  image-rendering:pixelated;
+}
+.fr-stage:hover .fr-shot{ border-color:#ff8a2a; }
 .fr-arch{
   position:absolute; left:50%; top:50%; width:220px; height:260px; margin:-130px 0 0 -110px;
   border:10px solid #3b130b; border-bottom:none;
@@ -138,6 +145,7 @@ main > section.s3d.is-idle{ transform:none; opacity:1; }
   100%{ transform:translate3d(0,0,380px); opacity:0; }
 }
 .fr-glow{
+  display:none;
   position:absolute; left:50%; top:50%; width:46px; height:46px; margin:-23px 0 0 -23px; border-radius:50%;
   background:radial-gradient(circle, #fff3c4 0%, #ff8a2a 40%, rgba(255,60,0,0) 70%);
   filter:blur(1px); animation:frPulse 1.6s ease-in-out infinite;

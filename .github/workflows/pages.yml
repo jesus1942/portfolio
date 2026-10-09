@@ -2,28 +2,70 @@ name: Deploy a GitHub Pages
 
 # El mismo repo sigue desplegándose en Railway (Express); GitHub Pages publica
 # la versión estática del sitio en https://jesus1942.github.io/portfolio/
+#
+# Capturas de los proyectos (scripts/capturas.py): se renuevan solas cada lunes,
+# a mano desde Actions ("Run workflow"), o en un push cuyo mensaje incluya [capturas].
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '7 12 * * 1'   # lunes 09:07 hora Argentina
   workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  capturas:
+    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[capturas]')
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar Playwright
+        run: |
+          pip install playwright==1.56.0 pillow
+          python -m playwright install --with-deps chromium
+
+      - name: Sacar capturas de cada proyecto en vivo
+        run: python scripts/capturas.py
+
+      - name: Guardar capturas en el repo
+        run: |
+          git config user.name "Jesus Olguin"
+          git config user.email "chucky9425@gmail.com"
+          git add screenshot-*.webp
+          if git diff --cached --quiet; then
+            echo "Sin cambios en las capturas"
+          else
+            git commit -m "chore: capturas actualizadas de los proyectos en vivo"
+            git push origin HEAD:main
+          fi
+
+  deploy:
+    needs: capturas
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main   # incluye las capturas recién commiteadas
 
       - name: Armar el sitio estático
         run: |
@@ -36,8 +78,6 @@ jobs:
           ls -la _site
 
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

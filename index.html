@@ -738,6 +738,68 @@
           </p>
         </div>
 
+        <!-- Featured: Control Seguro de Calentador — hardware propio, despiece 3D -->
+        <div class="reveal from-scale mb-6">
+          <div class="glass glass-hover rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+            <div class="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 text-xs font-medium">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 soft-pulse"></span>
+              Hardware propio
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <!-- Hand-drawn enclosure sketch -->
+                <svg viewBox="0 0 320 180" class="w-32 h-20 text-cyan-400/60 mb-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M40 60 L200 40 L290 70 L290 130 L130 152 L40 120 Z"/>
+                  <path d="M40 60 L130 90 L290 70 M130 90 L130 152"/>
+                  <path d="M150 62 L190 57 L212 64 L172 70 Z" opacity="0.8"/>
+                  <circle cx="160" cy="118" r="9"/><circle cx="195" cy="113" r="9"/><circle cx="230" cy="108" r="7"/><circle cx="260" cy="104" r="7"/>
+                  <path d="M70 70 L72 71 M92 77 L94 78 M112 84 L114 85" stroke-width="3"/>
+                </svg>
+
+                <h3 class="text-2xl font-bold text-white mb-2 hand-underline inline-block">Control Seguro de Calentador</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-4">
+                  Un equipo que diseñé de punta a punta para que un calentador de pileta nunca trabaje sin agua:
+                  circuito y placa de 116 componentes, firmware en ESP32 probado contra 30.000 escenarios de falla,
+                  app web por WiFi y gabinete impreso en 3D. En el despiece se desarma pieza por pieza mientras bajás por la página.
+                </p>
+                <div class="flex flex-wrap gap-1.5 mb-5">
+                  <span class="tag tag-cap">ESP32 · C++</span>
+                  <span class="tag tag-node">KiCad</span>
+                  <span class="tag tag-js">Three.js</span>
+                  <span class="tag tag-pwa">PWA</span>
+                  <span class="tag tag-py">Python</span>
+                  <span class="tag tag-html">OpenSCAD</span>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                  <a href="despiece-calentador.html"
+                     class="group flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-all hover:scale-105"
+                     style="background: linear-gradient(135deg, #0891b2, #0e7490)">
+                    Ver el despiece 3D
+                    <svg class="w-3.5 h-3.5 scribble-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="hidden md:block">
+                <figure class="glass rounded-xl overflow-hidden border border-white/10">
+                  <div class="flex items-center gap-1.5 px-3 py-2 border-b border-white/5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-400/60"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-400/60"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-400/60"></span>
+                    <span class="ml-2 text-[10px] text-zinc-500 font-mono truncate">jesus1942.github.io/portfolio/despiece-calentador.html</span>
+                  </div>
+                  <a href="despiece-calentador.html"><img src="screenshot-despiece.webp" loading="lazy" decoding="async" width="1000" height="625"
+                       alt="Despiece 3D del Control Seguro de Calentador: la placa con sus componentes separados sobre la base"
+                       class="w-full block" /></a>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Featured: Pool Installer -->
         <div class="reveal from-scale mb-6">
           <div class="glass glass-hover rounded-2xl p-6 sm:p-8 relative overflow-hidden">

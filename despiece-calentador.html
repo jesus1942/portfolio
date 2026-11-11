@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Control Seguro de Calentador · despiece 3D</title>
-<meta name="description" content="Despiece 3D del Control Seguro de Calentador de pileta: se desarma pieza por pieza al bajar por la página. Domotics &amp; IoT Solutions – by Jesús Olguín &amp; Cía.">
+<title>Control Seguro de Calentador · despiece 3D · Jesús Olguín</title>
+<meta name="description" content="Despiece 3D del Control Seguro de Calentador de pileta, diseñado y fabricado por Jesús Olguín: circuito, firmware, app y gabinete. Se desarma pieza por pieza al bajar por la página.">
+<meta property="og:title" content="Control Seguro de Calentador · despiece 3D">
+<meta property="og:image" content="https://jesus1942.github.io/portfolio/screenshot-despiece.webp">
 <link rel="icon" href="icon-192.png">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;800&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -37,6 +39,8 @@ body{background:var(--bg);color:var(--fg);font:18px/1.5 var(--f-body);margin:0}
 .texto p{margin:0 0 10px;max-width:36ch;text-shadow:0 1px 14px rgba(0,0,0,.9)}
 .texto .dato{font:14px/1.5 var(--f-mono);color:var(--muted);margin-top:14px}
 .texto .baja{color:var(--muted);font-size:15px}
+.texto .cta{pointer-events:auto;display:inline-block;margin-top:8px;font:800 20px var(--f-disp);color:var(--bg);background:var(--teal);padding:10px 22px;border-radius:4px;text-decoration:none}
+.texto .cta:focus-visible{outline:2px solid var(--nar);outline-offset:3px}
 .avance{position:absolute;right:max(18px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));font:500 12px/1 var(--f-mono);color:var(--muted);letter-spacing:.1em;display:flex;align-items:center;gap:10px}
 .avance i{display:block;width:120px;height:1px;background:rgba(255,255,255,.18);position:relative}
 .avance i b{position:absolute;left:0;top:-1px;height:3px;width:100%;background:var(--teal);transform-origin:left;transform:scaleX(0)}
@@ -195,63 +199,61 @@ fill="#0d8486" stroke="none">
 </svg>
 <span>Domotics &amp; IoT Solutions<br>by Jesús Olguín &amp; Cía</span></div>
 
-  <div class="texto"><div class="n">rev A2 · 212 × 112 × 60 mm</div>
+  <div class="texto"><div class="n">Diseño y fabricación propia · rev A2</div>
     <h1>Control Seguro de Calentador</h1>
-    <p>Cuida el calentador de la pileta: no lo deja encender ni quedar caliente si no hay agua circulando.</p>
-    <p class="baja">Bajá por la página y se desarma pieza por pieza.</p></div>
+    <p>Lo diseñé para que un calentador de pileta nunca trabaje sin agua. El circuito, el firmware, la app y el gabinete son míos, de punta a punta.</p>
+    <p class="baja">Bajá y lo desarmo delante tuyo.</p></div>
 
   <div class="texto"><div class="n">01 · Tornillos de la tapa</div>
-    <h2>Cuatro tornillos</h2>
-    <p>M3 × 16 de cabeza avellanada, uno por esquina. Roscan directo en el plástico de la base, o en insertos de bronce si se va a abrir seguido.</p></div>
+    <h2>Cuatro tornillos y está abierto</h2>
+    <p>Cuatro M3 de cabeza avellanada. Lo pensé para que un técnico lo revise en un minuto, con un destornillador común.</p></div>
 
   <div class="texto"><div class="n">02 · Tapa</div>
-    <h2>La tapa impresa</h2>
-    <p>Se imprime en PETG con el frente contra la cama. El logo y los rótulos quedan hundidos 0,6 mm y se pueden rellenar con pintura.</p>
-    <p class="dato">182 × 112 × 15 mm · 8 h · 84 g</p></div>
+    <h2>La tapa lleva mi marca grabada</h2>
+    <p>Impresa en PETG, con el logo y los rótulos hundidos en la pieza. No hay calcos que se despeguen con el sol.</p>
+    <p class="dato">182 × 112 × 15 mm</p></div>
 
   <div class="texto"><div class="n">03 · Frente</div>
-    <h2>Pantalla, botones y luces</h2>
-    <p>Para manejarlo sin el celular: una pantalla OLED de 1,3", cuatro pulsadores (subir, bajar, OK, atrás) y tres luces para bomba, calentador y falla.</p>
-    <p>Cada pulsador y cada luz entra por delante y se ajusta con su tuerca por detrás.</p></div>
+    <h2>Se maneja sin celular</h2>
+    <p>Pantalla OLED, cuatro botones y tres luces. Si se cae el WiFi, el equipo sigue protegiendo y se sigue manejando desde acá.</p>
+    <p>Cada botón y cada luz entra por delante y se ajusta con su tuerca por detrás.</p></div>
 
   <div class="texto"><div class="n">04 · Junta y cable plano</div>
-    <h2>Lo que une las dos mitades</h2>
-    <p>La junta de TPU queda apretada entre la tapa y el canal de la base, para que no entre agua ni polvo.</p>
-    <p>El cable plano de 16 vías lleva pantalla, botones y luces hasta la placa.</p></div>
+    <h2>Cerrado contra agua y polvo</h2>
+    <p>Una junta de TPU queda apretada entre la tapa y la base. El frente se une a la placa con un solo cable plano, que se desenchufa de un tirón.</p></div>
 
   <div class="texto"><div class="n">05 · ESP32</div>
-    <h2>El cerebro va enchufado</h2>
-    <p>El ESP32-DevKitC no está soldado: calza en dos tiras de pines. Corre la lógica de seguridad, el WiFi y la app.</p>
-    <p>Si algún día se quema, se cambia sin soldador.</p></div>
+    <h2>El cerebro, con firmware mío</h2>
+    <p>Un ESP32 con la lógica de seguridad que escribí y probé contra 30.000 escenarios de falla simulados. No rompió ninguna regla.</p>
+    <p>Va enchufado, no soldado: se cambia en segundos.</p></div>
 
   <div class="texto"><div class="n">06 · Placa</div>
-    <h2>La placa principal</h2>
-    <p>Doble faz, con todos los componentes del lado de arriba. Apoya en cuatro torres de 6 mm y se fija con tornillos M3 × 8.</p>
+    <h2>La placa es diseño mío</h2>
+    <p>Doble faz, ruteada completa y verificada contra el esquema y el firmware, sin un solo error de diseño. El paquete para fabricarla en serie ya está armado.</p>
     <p class="dato">170 × 100 × 1,6 mm · rev A2</p></div>
 
   <div class="texto"><div class="n">07 · Componentes</div>
-    <h2>116 piezas, todas de inserción</h2>
-    <p>Resistencias, diodos, capacitores, optoacopladores, relés y borneras. Ninguna es de montaje superficial: la placa se puede armar y reparar con un soldador común.</p></div>
+    <h2>116 componentes, ninguno al azar</h2>
+    <p>Todos de inserción, a propósito: la placa se arma y se repara con un soldador común, en cualquier taller.</p></div>
 
   <div class="texto"><div class="n">08 · Zona de 230 V</div>
     <h2>Donde entra la red</h2>
-    <p>Fusible, varistor y la fuente aislada que baja de 230 V a 12 V. Los relés K1 y K4, de aislación reforzada, manejan la bobina del contactor de la bomba y la alarma.</p>
-    <p class="dato">13 mm libres de cobre hasta la baja tensión</p></div>
+    <p>Fusible, varistor, fuente aislada y relés de aislación reforzada. Dejé 13 mm libres entre los 230 V y el resto de la placa; la norma pide 5.</p></div>
 
   <div class="texto"><div class="n">09 · Zona de baja tensión</div>
     <h2>Mando y sensores</h2>
-    <p>El relé K2 es el contacto seco que habilita el calentador; K3 le da el pulso de reset. Alrededor, los optoacopladores de las entradas y las borneras de sondas, corriente y presión.</p>
-    <p class="dato">todo en 12 V o menos</p></div>
+    <p>El calentador se habilita con un contacto seco: mi placa nunca le manda tensión. Una cadena de seguridad cableada lo corta aunque el programa falle.</p>
+    <p>Mide la temperatura de entrada y de salida, la corriente de la bomba y la presión del filtro.</p></div>
 
   <div class="texto"><div class="n">10 · Base</div>
     <h2>Base y prensacables</h2>
-    <p>Paredes de 3 mm y cuatro orejas para la pared. Seis prensacables, cada uno con su tuerca por dentro: dos M20 para red y salidas, cuatro M16 para entradas, corriente, calentador y sondas.</p>
-    <p class="dato">212 × 112 × 46 mm · 15 h · 150 g</p></div>
+    <p>Paredes de 3 mm, orejas para la pared y seis prensacables hacia abajo. Entra el cable, no el agua.</p>
+    <p class="dato">212 × 112 × 46 mm</p></div>
 
-  <div class="texto"><div class="n">11 · Armado</div>
-    <h2>Y de vuelta a su lugar</h2>
-    <p>Placa a la base, ESP32 a sus tiras, cable plano, junta, tapa y cuatro tornillos.</p>
-    <p class="baja">La conexión a 230 V la hace un electricista matriculado.</p></div>
+  <div class="texto"><div class="n">11 · Jesús Olguín</div>
+    <h2>Esto es lo que hago</h2>
+    <p>Diseño el circuito, programo el firmware, hago la app y fabrico el gabinete. Si tenés un equipo que controlar, lo hacemos.</p>
+    <p><a class="cta" href="https://jesus1942.github.io/portfolio/#contacto">Hablemos</a></p></div>
 
   <div class="avance"><span id="cuenta">00 / 11</span><i><b id="barra"></b></i></div>
   <div id="aviso">Arrastrá para girar</div>
@@ -450,8 +452,8 @@ const TEX_PLACA = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBA
 
   // ---- cámara y foco por paso
   //            giro, altura, distancia, mira x, y, z
-  const CAM = [[-32, 30, 400, 0, 28, 0], [-22, 40, 430, 0, 58, 0], [-14, 22, 480, 0, 72, 0], [10, 34, 430, 20, 122, 0], [-46, 16, 480, 0, 78, 0], [28, 28, 440, 0, 92, 0],
-    [-18, 34, 520, 0, 96, 0], [-38, 22, 560, 0, 118, 0], [-60, 36, 330, -52, 100, 4], [50, 36, 340, 48, 100, 4], [-26, 12, 400, 14, 24, 14], [-32, 30, 400, 0, 28, 0]];
+  const CAM = [[-32, 30, 420, 0, 28, 0], [-22, 40, 430, 0, 58, 0], [-14, 22, 480, 0, 72, 0], [10, 34, 430, 20, 122, 0], [-46, 16, 480, 0, 78, 0], [28, 28, 440, 0, 92, 0],
+    [-18, 34, 520, 0, 96, 0], [-38, 22, 560, 0, 118, 0], [-60, 36, 330, -52, 100, 4], [50, 36, 340, 48, 100, 4], [-26, 12, 400, 14, 24, 14], [-32, 30, 420, 0, 28, 0]];
   const PLACA = ["pcb", "z230", "baja", "idc", "zocalos"];
   const FOCO = [null, null, ["tapa"], ["frente"], ["junta", "cable"], ["esp", "zocalos"], PLACA.concat("tornPlaca"), PLACA, ["z230", "pcb"], ["baja", "idc", "pcb"], ["base", "prensas"], null];
   const ANCLA = [null, "tornTapa", "tapa", "boton", "junta", "esp", "pcb", "U4", "K1", "K2", null, null];
@@ -491,7 +493,7 @@ const TEX_PLACA = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBA
     giroExtra += (giroObj - giroExtra) * kO; if (!arrastre) giroObj *= Math.exp(-dt * 0.9);
     const fk = suave(lim((fr - 0.05) / 0.9)), a = CAM[i], b = CAM[i + 1], c = a.map((v, k) => mez(v, b[k], fk));
     const vaiven = quieto ? 0 : 1, entra = quieto ? 0 : 1 - suave(lim(seg / 2.6)), ang = (c[0] + giroExtra + vaiven * Math.sin(seg * 0.22) * 3.2 - entra * 38) * Math.PI / 180, alt = (c[1] + vaiven * Math.sin(seg * 0.17 + 1) * 1.2) * Math.PI / 180;
-    const d = c[2] * (ancho ? Math.max(1, 1.5 / cam.aspect) : Math.max(1, 1.08 / cam.aspect)) * (1 + vaiven * Math.sin(seg * 0.13) * 0.012 + entra * 0.55);
+    const d = c[2] * (ancho ? Math.max(1, 1.85 / cam.aspect) : Math.max(1, 1.08 / cam.aspect)) * (1 + vaiven * Math.sin(seg * 0.13) * 0.012 + entra * 0.55);
     cam.position.set(c[3] + d * Math.sin(ang) * Math.cos(alt), c[4] + d * Math.sin(alt), c[5] + d * Math.cos(ang) * Math.cos(alt)); cam.lookAt(c[3], c[4], c[5]);
     renderer.render(scene, cam);
     // textos sueltos y línea hacia la pieza

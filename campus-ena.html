@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Campus ENA · suite para una escuela de tres niveles · Jesús Olguín</title>
+<meta name="description" content="Campus ENA: la plataforma que diseñé y desarrollé para la Escuela Nueva Austral. Sitio institucional en tres idiomas, preinscripción en línea, gestión académica, aulas virtuales, correo institucional y cobranza con factura electrónica de ARCA, para Primario, Secundario e Instituto Superior.">
+<meta property="og:title" content="Campus ENA · suite para una escuela de tres niveles">
+<meta property="og:description" content="Sitio, preinscripción, aulas virtuales, correo y cobranza con ARCA, en producción para una escuela de Puerto Madryn.">
+<meta property="og:image" content="https://jesus1942.github.io/portfolio/screenshot-campus-ena.webp">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#030508">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* Caso de estudio en el mismo tono del portfolio: fondo casi negro, vidrio y cian.
+   Los colores de la escuela (azul, rojo, arena) aparecen solo como acentos de cada nivel. */
+:root{
+  color-scheme:dark;
+  --bg:#030508; --fg:#f4f4f5; --muted:#a1a1aa; --dim:#71717a; --line:rgba(255,255,255,.08);
+  --cyan:#22d3ee; --cyan-2:#67e8f9;
+  --prim:#3fb48f; --sec:#6d8fe0; --ter:#e0525b; --arena:#efe6d4;
+  --f-body:Inter,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,monospace; --f-hand:Caveat,cursive;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,.045) 1px,transparent 0);background-size:28px 28px;z-index:0}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 22px}
+.mono{font-family:var(--f-mono)}
+.kicker{font:500 12px/1 var(--f-mono);letter-spacing:.12em;color:var(--cyan);text-transform:uppercase}
+.hand{font-family:var(--f-hand);font-weight:700}
+.grad{background:linear-gradient(135deg,#67e8f9,#22d3ee 50%,#06b6d4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.glass{background:rgba(255,255,255,.025);border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:18px}
+
+/* barra */
+.top{position:sticky;top:0;z-index:20;background:rgba(3,5,8,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+.top a{text-decoration:none;font-size:14px;color:var(--muted)}
+.top a:hover,.top a:focus-visible{color:var(--cyan-2)}
+.volver{display:flex;align-items:center;gap:8px}
+.volver svg{width:16px;height:16px}
+.top nav{display:flex;gap:22px}
+@media (max-width:720px){.top nav{display:none}}
+
+/* portada */
+.hero{padding:72px 0 40px}
+.hero h1{font-size:clamp(44px,7.4vw,92px);line-height:.98;letter-spacing:-.035em;margin:16px 0 18px;font-weight:800}
+.hero h1 .hand{font-size:.62em;display:block;letter-spacing:0;margin-top:6px;color:var(--cyan-2);-webkit-text-fill-color:currentColor}
+.hero p.lead{font-size:clamp(18px,2vw,21px);color:#d4d4d8;max-width:60ch;margin:0 0 26px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:44px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .2s ease,background .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn-1{background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff}
+.btn-2{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#e4e4e7}
+.btn svg{width:15px;height:15px}
+.btn:focus-visible,.shot:focus-visible{outline:2px solid var(--cyan-2);outline-offset:3px}
+
+.numeros{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:46px}
+.numeros div{background:#05080c;padding:18px 18px 16px}
+.numeros b{display:block;font-size:clamp(28px,3.4vw,40px);line-height:1;font-weight:800;letter-spacing:-.02em}
+.numeros span{display:block;margin-top:6px;font-size:13px;color:var(--muted);line-height:1.35}
+@media (max-width:820px){.numeros{grid-template-columns:repeat(2,1fr)}.numeros div:last-child{grid-column:span 2}}
+
+.browser{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#0b0f14;box-shadow:0 40px 80px -30px rgba(6,182,212,.25)}
+.browser .bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--line)}
+.browser .bar i{width:10px;height:10px;border-radius:50%;background:rgba(248,113,113,.6)}
+.browser .bar i:nth-child(2){background:rgba(250,204,21,.6)}.browser .bar i:nth-child(3){background:rgba(74,222,128,.6)}
+.browser .bar span{margin-left:8px;font:11px var(--f-mono);color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* secciones */
+section{padding:76px 0}
+section h2{font-size:clamp(30px,4.2vw,48px);line-height:1.06;letter-spacing:-.025em;margin:12px 0 16px;font-weight:800}
+section .intro{color:#c4c4cc;max-width:62ch;margin:0 0 34px;font-size:18px}
+.dos{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+@media (max-width:900px){.dos{grid-template-columns:1fr}}
+
+.problema p{color:#d4d4d8;margin:0 0 14px;max-width:58ch}
+.problema ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.problema li{padding-left:22px;position:relative;color:#c4c4cc}
+.problema li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:2px;background:var(--cyan)}
+
+.niveles{display:grid;gap:12px}
+.nivel{display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-left:3px solid var(--c)}
+.nivel b{font-size:17px}
+.nivel small{display:block;color:var(--muted);font-size:13.5px;margin-top:2px}
+.nivel .n{margin-left:auto;font:500 13px var(--f-mono);color:var(--c);white-space:nowrap}
+
+/* modulos */
+.modulos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:960px){.modulos{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.modulos{grid-template-columns:1fr}}
+.mod{padding:22px 22px 20px;border-radius:16px;background:rgba(255,255,255,.025);border:1px solid var(--line);transition:border-color .3s ease,transform .3s ease,background .3s ease}
+.mod:hover{border-color:rgba(103,232,249,.3);background:rgba(255,255,255,.045);transform:translateY(-3px)}
+.mod svg{width:34px;height:34px;color:var(--cyan-2);margin-bottom:12px}
+.mod h3{margin:0 0 8px;font-size:18px;letter-spacing:-.01em}
+.mod p{margin:0 0 10px;color:#b4b4bc;font-size:15px;line-height:1.55}
+.mod ul{margin:0;padding:0;list-style:none;display:grid;gap:5px}
+.mod li{font-size:13.5px;color:var(--muted);padding-left:14px;position:relative;line-height:1.45}
+.mod li::before{content:"";position:absolute;left:0;top:.6em;width:5px;height:5px;border-radius:50%;background:rgba(103,232,249,.55)}
+
+/* galeria */
+.galeria{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.galeria figure{margin:0;grid-column:span 3}
+.galeria figure.ancha{grid-column:span 6}
+.galeria figure.angosta{grid-column:span 2}
+.galeria figure.media{grid-column:span 4}
+@media (max-width:820px){.galeria figure,.galeria figure.media,.galeria figure.angosta{grid-column:span 6}}
+.shot{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.shot img{width:100%;height:auto;transition:transform .5s ease}
+.shot:hover img{transform:scale(1.015)}
+.galeria figcaption{margin-top:10px;font-size:14px;color:var(--muted);line-height:1.45}
+.galeria figcaption b{color:#e4e4e7;font-weight:600}
+.movil-shot{max-width:280px;margin:0 auto;border-radius:26px;border:6px solid #1c2128}
+.nota{font:12.5px var(--f-mono);color:var(--dim);margin-top:18px}
+
+/* flujo */
+.flujo{padding:26px;border-radius:18px;background:rgba(255,255,255,.02);border:1px solid var(--line)}
+.flujo svg{width:100%;height:auto}
+@media (max-width:700px){.flujo{overflow-x:auto;-webkit-overflow-scrolling:touch}.flujo svg{min-width:660px}}
+.flujo-txt{margin-top:14px;font-size:14.5px;color:var(--muted)}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.stack span{font:500 12.5px var(--f-mono);padding:5px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#d4d4d8}
+.tecnico{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:30px}
+@media (max-width:760px){.tecnico{grid-template-columns:1fr}}
+.tec{padding:20px 22px;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid var(--line)}
+.tec h3{margin:0 0 6px;font-size:16.5px}
+.tec p{margin:0;color:#b4b4bc;font-size:15px;line-height:1.55}
+
+/* detalles */
+.detalles{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line)}
+@media (max-width:760px){.detalles{grid-template-columns:1fr}}
+.det{padding:22px 4px 22px 0;border-bottom:1px solid var(--line)}
+.det:nth-child(odd){padding-right:34px}
+.det b{display:block;font-size:17px;margin-bottom:4px}
+.det span{color:#b4b4bc;font-size:15px}
+
+/* cierre */
+.cierre{text-align:center;padding:90px 0 110px}
+.cierre h2{max-width:20ch;margin:12px auto 16px}
+.cierre p{color:#c4c4cc;max-width:56ch;margin:0 auto 28px}
+.cierre .ctas{justify-content:center}
+.pie{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--dim);font-size:13px}
+.pie .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+
+/* aparicion */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.btn,.mod,.shot img{transition:none}}
+
+/* visor */
+#visor{position:fixed;inset:0;z-index:50;background:rgba(2,4,6,.94);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+#visor.abierto{display:flex}
+#visor img{max-width:min(1400px,100%);max-height:86vh;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+#visor p{position:absolute;left:0;right:0;bottom:18px;text-align:center;color:var(--muted);font-size:14px;margin:0;padding:0 20px}
+#visor button{position:absolute;top:16px;right:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:10px;padding:8px 12px;font:600 14px var(--f-body);cursor:pointer}
+</style>
+</head>
+<body>
+<a href="#contenido" style="position:absolute;left:-9999px" onfocus="this.style.left='12px';this.style.top='12px'" onblur="this.style.left='-9999px'">Saltar al contenido</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="volver" href="./#proyectos">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12 Q13 12.5 6 12 M10 8 Q7 11 6 12 Q7 13 10 16"/></svg>
+      Volver al portfolio
+    </a>
+    <nav aria-label="Secciones del caso">
+      <a href="#modulos">Qué tiene</a>
+      <a href="#capturas">Capturas</a>
+      <a href="#como">Cómo está hecho</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+  <!-- Portada -->
+  <div class="wrap hero">
+    <p class="kicker">Caso de estudio · en producción desde 2026</p>
+    <h1><span class="grad">Campus ENA</span><span class="hand">una escuela entera en una sola plataforma</span></h1>
+    <p class="lead">
+      Diseñé y desarrollé la plataforma de la Escuela Nueva Austral, en Puerto Madryn: el sitio institucional, la preinscripción en línea,
+      la gestión académica, las aulas virtuales, el correo y la cobranza con factura electrónica.
+      Funciona para tres niveles a la vez, cada uno con su dirección, sus alumnos y sus datos, sin que ninguno vea lo del otro.
+    </p>
+    <div class="ctas">
+      <a class="btn btn-1" href="https://www.escuelanuevaaustral.com.ar" target="_blank" rel="noopener">
+        Ver el sitio en vivo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/></svg>
+      </a>
+      <a class="btn btn-2" href="#modulos">Qué tiene adentro</a>
+    </div>
+
+    <div class="numeros rv" role="list" aria-label="La plataforma en números">
+      <div role="listitem"><b class="grad">3</b><span>niveles aislados: Primario, Secundario e Instituto Superior</span></div>
+      <div role="listitem"><b class="grad">77</b><span>aulas virtuales por materia</span></div>
+      <div role="listitem"><b class="grad">93</b><span>permisos en 14 cargos, por nivel</span></div>
+      <div role="listitem"><b class="grad">234</b><span>pruebas automáticas en cada publicación</span></div>
+      <div role="listitem"><b class="grad">3</b><span>idiomas en el sitio: castellano, inglés e italiano</span></div>
+    </div>
+
+    <figure class="browser rv" style="margin:0">
+      <div class="bar"><i></i><i></i><i></i><span>escuelanuevaaustral.com.ar</span></div>
+      <img src="campus-ena/portada.webp" width="1280" height="800" alt="Portada del sitio de la Escuela Nueva Austral: el nombre de la escuela junto a un mosaico de figuras geométricas en azul, rojo, naranja y violeta" fetchpriority="high">
+    </figure>
+  </div>
+
+  <!-- El problema -->
+  <section>
+    <div class="wrap dos">
+      <div class="problema rv">
+        <p class="kicker">El punto de partida</p>
+        <h2>Una escuela, tres niveles y mucho papel</h2>
+        <p>
+          La Escuela Nueva Austral tiene Primario, Secundario y un Instituto Superior que abre la Tecnicatura en Tecnologías Aplicadas.
+          Cada nivel tiene su propia dirección, su número oficial y su forma de trabajar, pero comparten la administración y las familias.
+        </p>
+        <p>Antes de la plataforma, eso se resolvía con planillas, grupos de WhatsApp y correos sueltos:</p>
+        <ul>
+          <li>Las consultas y preinscripciones llegaban por cualquier canal y se perdían.</li>
+          <li>Las cuotas se controlaban a mano, familia por familia.</li>
+          <li>No había un lugar común para las clases, las tareas y los avisos.</li>
+          <li>Cada nivel necesitaba ver solo lo suyo, y eso no lo garantizaba ninguna planilla.</li>
+        </ul>
+      </div>
+      <div class="niveles rv" aria-label="Los tres niveles">
+        <div class="nivel" style="--c:var(--prim)"><div><b>Nivel Primario</b><small>Escuela Nueva Austral</small></div><span class="n">N.º 1044</span></div>
+        <div class="nivel" style="--c:var(--sec)"><div><b>Nivel Secundario</b><small>Escuela Nueva Austral</small></div><span class="n">N.º 1746</span></div>
+        <div class="nivel" style="--c:var(--ter)"><div><b>Nivel Superior</b><small>Instituto Superior Nueva Austral</small></div><span class="n">N.º 1831</span></div>
+        <p class="hand" style="font-size:24px;color:var(--cyan-2);margin:8px 0 0 4px;transform:rotate(-1.5deg)">cada uno con su dirección, sus alumnos y su cobranza</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modulos -->
+  <section id="modulos">
+    <div class="wrap">
+      <p class="kicker rv">Qué construí</p>
+      <h2 class="rv">Todo lo que tiene adentro</h2>
+      <p class="intro rv">Doce módulos que se hablan entre sí. Cada persona entra con su usuario y ve solo lo que su cargo le permite, en su nivel.</p>
+
+      <div class="modulos">
+        <article class="mod rv">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="8" width="30" height="22" rx="3"/><path d="M5 14h30M14 34h12M20 30v4"/><circle cx="9" cy="11" r=".8" fill="currentColor"/></svg>
+          <h3>Sitio institucional</h3>
+          <p>La cara pública de la escuela, editable desde el Campus sin tocar código.</p>
+          <ul><li>Portada animada y una página por nivel</li><li>Castellano, inglés e italiano</li><li>Novedades, Instagram y contacto de cada nivel</li><li>Instalable en el celular</li></ul>
+        </article>
+        <article class="mod rv">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5h13l7 7v23H11z"/><path d="M24 5v7h7M16 20h10M16 25h10M16 30h6"/></svg>
+          <h3>Preinscripción y admisión</h3>
+          <p>De la consulta en el sitio a la matrícula, sin papeles.</p>
+          <ul><li>Formulario con documentación adjunta</li><li>Admisión por la dirección del nivel</li><li>Comprobante de matrícula y alta en el Campus</li><li>Lista de espera cuando no hay cupo</li></ul>
+        </article>
+        <article class="mod rv">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14 20 7l16 7-16 7z"/><path d="M10 17v8c3 3 7 4 10 4s7-1 10-4v-8M36 14v9"/></svg>
+          <h3>Gestión académica</h3>
+          <p>La estructura de la escuela y el legajo de cada alumno.</p>
+          <ul><li>Ciclos lectivos, cursos, divisiones y materias</li><li>Matrículas con control de cupo</li><li>Pases e historial por alumno</li><li>Importación del padrón y cohortes</li></ul>
+        </article>
+        <article class="mod rv">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="7" width="28" height="20" rx="2"/><path d="M12 33h16M15 14l-3 3 3 3M25 14l3 3-3 3M22 12l-4 10"/></svg>
+          <h3>Aulas virtuales</h3>
+          <p>Un aula por materia, propia de la escuela, sin plataformas externas.</p>
+          <ul><li>Anuncios, materiales y tareas con entregas</li><li>Evaluaciones con corrección automática</li><li>Taller de programación por bloques</li><li>Biblioteca de herramientas de aprendizaje</li></ul>
+        </article>
+        <article class="mod rv">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="22" height="18" rx="3"/><path d="m26 17 10-5v16l-10-5"/></svg>
+          <h3>Clases en vivo</h3>
+          <p>Videollamadas desde el aula, con la clase agendada para todo el curso.</p>
+          <ul><li>Aviso a alumnos y familias</li><li>Registro de quién entró</li><li>Chat abierto: sin mensajes privados en la llamada</li></ul>
+        </article>
+        <article class="mod rv">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h20v14H14l-6 5v-5H6z"/><path d="M26 15h8v12h-2v5l-6-5h-8v-4"/></svg>
+          <h3>Comunicación</h3>
+          <p>Lo que antes iba por WhatsApp, ordenado y con registro.</p>
+          <ul><li>Mensajes con alumnos y familias</li><li>Grupos por curso y cartelera</li><li>Avisos con copia por correo y campana</li><li>Novedades semanales del nivel</li></ul>
+        </article>
+        <article class="mod rv">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="9" width="30" height="22" rx="2"/><path d="m5 11 15 11 15-11"/></svg>
+          <h3>Correo institucional</h3>
+          <p>Casillas del dominio de la escuela, leídas y respondidas desde el Campus.</p>
+          <ul><li>Una casilla por nivel y casillas personales</li><li>Recepción y envío con adjuntos</li><li>Membrete del nivel y firma de quien escribe</li></ul>
+        </article>
+        <article class="mod rv">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="30" height="20" rx="3"/><path d="M5 16h30M10 24h6M24 24h6"/></svg>
+          <h3>Cobranza y factura electrónica</h3>
+          <p>El circuito completo del dinero, por nivel y por familia.</p>
+          <ul><li>Plan por nivel: becas, hermanos, pronto pago y recargo</li><li>Cuotas, pagos informados por las familias y recibos</li><li>Factura electrónica de ARCA por cada pago</li><li>Informes de cobranza y presupuesto anual</li></ul>
+        </article>
+        <article class="mod rv">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="7" width="26" height="28" rx="2"/><path d="M14 4v6M26 4v6M7 15h26M13 22l3 3 6-6"/></svg>
+          <h3>Asistencia</h3>
+          <p>De alumnos y de personal, con un panel para la dirección.</p>
+          <ul><li>Por día y división, o por materia en el Superior</li><li>Licencias del personal</li><li>Alumnos en riesgo y porcentajes</li></ul>
+        </article>
+        <article class="mod rv">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="15" cy="14" r="5"/><path d="M5 32c1-6 5-9 10-9s9 3 10 9"/><path d="M27 12h8M27 18h8M29 24h6"/></svg>
+          <h3>Personal y permisos</h3>
+          <p>Un alta y la persona ya tiene sus cursos, su horario y su acceso.</p>
+          <ul><li>Ficha única de personal y docencia por materia</li><li>Cargos con alcance por nivel o por división</li><li>Fechas de vigencia y bitácora de auditoría</li></ul>
+        </article>
+        <article class="mod rv">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4 7 9v10c0 8 6 14 13 17 7-3 13-9 13-17V9z"/><path d="m14 20 4 4 8-8"/></svg>
+          <h3>Seguridad y copias</h3>
+          <p>Datos de menores tratados como lo que son.</p>
+          <ul><li>Aislamiento estricto entre niveles</li><li>Copias cifradas diarias y mensuales, con restauración probada</li><li>Documentos y recibos con enlaces firmados que vencen</li><li>Consentimiento y documentos legales</li></ul>
+        </article>
+        <article class="mod rv">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5h10M17 5v10L8 31a3 3 0 0 0 3 4h18a3 3 0 0 0 3-4l-9-16V5"/><path d="M12 25h16"/></svg>
+          <h3>Pruebas y publicación</h3>
+          <p>Nada llega a la escuela sin pasar antes por un entorno de pruebas.</p>
+          <ul><li>234 pruebas y más de 3.600 verificaciones</li><li>Ensayos automáticos de pantallas y del sitio</li><li>Control de datos antes y después de cada publicación</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capturas -->
+  <section id="capturas">
+    <div class="wrap">
+      <p class="kicker rv">Capturas</p>
+      <h2 class="rv">Cómo se ve</h2>
+      <p class="intro rv">El sitio público y el Campus por dentro. Tocá una imagen para verla grande.</p>
+
+      <div class="galeria">
+        <figure class="ancha rv">
+          <button class="shot" type="button" data-cap="Página del Nivel Primario: el boleto de ingreso se corta con una tijera mientras bajás por la página."><img src="campus-ena/primario.webp" width="1280" height="800" loading="lazy" alt="Página del Nivel Primario: un boleto con el búho de la escuela, el ciclo 2027 y el número 1044, que se separa al cortarlo una tijera dibujada a mano"></button>
+          <figcaption><b>Nivel Primario.</b> Un boleto de ingreso que se corta con una tijera a medida que bajás, con dibujos hechos a mano que se mueven como tinta.</figcaption>
+        </figure>
+        <figure class="media rv">
+          <button class="shot" type="button" data-cap="Página del Instituto Superior, con la Tecnicatura en Tecnologías Aplicadas."><img src="campus-ena/terciario.webp" width="1280" height="800" loading="lazy" alt="Página del Instituto Superior Nueva Austral, número 1831, con la Tecnicatura Superior en Tecnologías Aplicadas y el botón de preinscripción 2027"></button>
+          <figcaption><b>Instituto Superior.</b> Cada nivel con su nombre oficial y su número, su contacto y su preinscripción.</figcaption>
+        </figure>
+        <figure class="angosta rv">
+          <button class="shot movil-shot" type="button" data-cap="La portada en el celular."><img src="campus-ena/movil.webp" width="390" height="844" loading="lazy" alt="La portada del sitio en un celular, con el mosaico de figuras arriba y el saludo en castellano"></button>
+          <figcaption style="text-align:center"><b>En el celular.</b> El saludo cambia entre castellano, inglés e italiano.</figcaption>
+        </figure>
+        <figure class="rv">
+          <button class="shot" type="button" data-cap="Aulas virtuales de los tres niveles."><img src="campus-ena/aulas.webp" width="1280" height="800" loading="lazy" alt="Listado de aulas virtuales del Campus, una tarjeta por materia con el curso, el nivel y el docente a cargo"></button>
+          <figcaption><b>Aulas virtuales.</b> Una por materia, marcada con el color de su nivel.</figcaption>
+        </figure>
+        <figure class="rv">
+          <button class="shot" type="button" data-cap="Un aula del Instituto Superior: evaluación con corrección automática y trabajo práctico con entregas."><img src="campus-ena/aula.webp" width="1280" height="800" loading="lazy" alt="Aula de Programación I con una evaluación con corrección automática y un trabajo práctico con fecha de entrega y calificación sobre 10"></button>
+          <figcaption><b>Dentro de un aula.</b> Evaluaciones que se corrigen solas y tareas con entregas, fechas y notas.</figcaption>
+        </figure>
+        <figure class="rv">
+          <button class="shot" type="button" data-cap="Permisos por cargo y por nivel."><img src="campus-ena/permisos.webp" width="1280" height="800" loading="lazy" alt="Pantalla de permisos por cargo: se elige nivel y cargo y se marcan los permisos de estructura y matrícula"></button>
+          <figcaption><b>Permisos por cargo.</b> Cada nivel decide qué puede hacer cada cargo, sin tocar a los demás.</figcaption>
+        </figure>
+        <figure class="rv">
+          <button class="shot" type="button" data-cap="Configuración del sitio público desde el Campus."><img src="campus-ena/configuracion.webp" width="1280" height="800" loading="lazy" alt="Configuración del sitio público con pestañas por nivel, consultas de preinscripción y Trabajá con nosotros"></button>
+          <figcaption><b>El sitio se edita desde el Campus.</b> Textos, fotos, aranceles, reuniones y convocatorias, por nivel.</figcaption>
+        </figure>
+      </div>
+      <p class="nota rv">Las capturas del Campus son de un entorno de prueba con datos inventados. Ningún dato real de la escuela aparece en esta página.</p>
+    </div>
+  </section>
+
+  <!-- Como esta hecho -->
+  <section id="como">
+    <div class="wrap">
+      <p class="kicker rv">Cómo está hecho</p>
+      <h2 class="rv">Lo que no se ve, pero sostiene todo</h2>
+      <p class="intro rv">Es una escuela real con datos de chicos: no hay lugar para probar en producción. Por eso cada cambio sigue el mismo camino.</p>
+
+      <div class="flujo rv">
+        <svg viewBox="0 0 1000 205" role="img" aria-labelledby="flujo-t">
+          <title id="flujo-t">Camino de cada cambio: código, entorno de pruebas con datos ficticios, control y producción con verificación</title>
+          <defs><marker id="pf" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#67e8f9"/></marker></defs>
+          <g font-family="Inter,sans-serif" text-anchor="middle">
+            <g><rect x="10" y="40" width="200" height="86" rx="14" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)"/><text x="110" y="78" fill="#f4f4f5" font-size="19" font-weight="700">Código</text><text x="110" y="102" fill="#a1a1aa" font-size="14">234 pruebas locales</text></g>
+            <g><rect x="270" y="40" width="200" height="86" rx="14" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)"/><text x="370" y="78" fill="#f4f4f5" font-size="19" font-weight="700">Pruebas</text><text x="370" y="102" fill="#a1a1aa" font-size="14">entorno con datos ficticios</text></g>
+            <g><rect x="530" y="40" width="200" height="86" rx="14" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)"/><text x="630" y="78" fill="#f4f4f5" font-size="19" font-weight="700">Control</text><text x="630" y="102" fill="#a1a1aa" font-size="14">ensayos y copia del día</text></g>
+            <g><rect x="790" y="40" width="200" height="86" rx="14" fill="rgba(34,211,238,.08)" stroke="#22d3ee"/><text x="890" y="78" fill="#f4f4f5" font-size="19" font-weight="700">Producción</text><text x="890" y="102" fill="#a1a1aa" font-size="14">verificación posterior</text></g>
+            <path d="M214 83 H264" stroke="#67e8f9" stroke-width="2" fill="none" marker-end="url(#pf)"/>
+            <path d="M474 83 H524" stroke="#67e8f9" stroke-width="2" fill="none" marker-end="url(#pf)"/>
+            <path d="M734 83 H784" stroke="#67e8f9" stroke-width="2" fill="none" marker-end="url(#pf)"/>
+            <path d="M630 130 Q630 168 500 168 Q370 168 370 134" stroke="rgba(248,113,113,.7)" stroke-width="1.6" stroke-dasharray="5 5" fill="none" marker-end="url(#pf)"/>
+            <text x="500" y="196" fill="#fca5a5" font-size="14">si algo falla, vuelve a pruebas y no se publica</text>
+          </g>
+        </svg>
+        <p class="flujo-txt">Los datos de prueba nunca pasan a producción, y después de cada publicación se verifica que el sitio, el correo y las aulas sigan funcionando.</p>
+      </div>
+
+      <div class="tecnico">
+        <div class="tec rv"><h3>Un sistema, tres niveles aislados</h3><p>Cada consulta lleva el nivel de quien la hace. Una persona de Primario no puede leer ni por error un dato de Secundario, y cada dirección administra solo su nivel.</p></div>
+        <div class="tec rv"><h3>Permisos que se pueden explicar</h3><p>93 permisos repartidos en 14 cargos, con alcance por nivel o por división y fechas de vigencia. Cada otorgamiento y cada revocación quedan registrados.</p></div>
+        <div class="tec rv"><h3>Copias que se restauran de verdad</h3><p>Copias cifradas todos los días y una vez por mes una restauración completa en una base aparte, comparando tabla por tabla con el original.</p></div>
+        <div class="tec rv"><h3>Integraciones reales</h3><p>Factura electrónica con ARCA, correo propio del dominio con recepción y envío, videollamadas integradas en el aula y recordatorios automáticos por correo.</p></div>
+      </div>
+
+      <div class="stack rv" aria-label="Tecnologías">
+        <span>Laravel</span><span>PHP 8</span><span>Vue</span><span>MySQL</span><span>Railway</span><span>Docker</span><span>Resend</span><span>Jitsi</span><span>ARCA</span><span>PWA</span><span>GitHub Actions</span><span>PHPUnit</span>
+      </div>
+      <p class="nota rv">La facturación parte de una base de código abierto (Crater, de Bytefury); todo lo escolar es desarrollo propio.</p>
+    </div>
+  </section>
+
+  <!-- Detalles -->
+  <section>
+    <div class="wrap">
+      <p class="kicker rv">Detalles</p>
+      <h2 class="rv">Las cosas chicas que más me gustan</h2>
+      <div class="detalles">
+        <div class="det rv"><b>El nombre correcto en cada lugar</b><span>Cada nivel aparece con su número oficial, y el Superior como Instituto, en el sitio, en el Campus y en los correos.</span></div>
+        <div class="det rv"><b>Correos con membrete</b><span>Lo que sale de la escuela lleva el membrete del nivel y la firma de quien lo escribe, con su cargo.</span></div>
+        <div class="det rv"><b>Formularios que no se caen</b><span>Si una familia deja el formulario abierto toda la tarde, al enviarlo no pierde lo que escribió.</span></div>
+        <div class="det rv"><b>Avisos que se van solos</b><span>La invitación a una reunión desaparece del sitio cuando la reunión ya pasó, y los recordatorios salen una sola vez.</span></div>
+        <div class="det rv"><b>Animaciones con permiso</b><span>Todo lo que se mueve se queda quieto si el teléfono pide menos movimiento.</span></div>
+        <div class="det rv"><b>Sin depender de terceros para enseñar</b><span>Las aulas, las evaluaciones y las clases en vivo son de la escuela, no de una plataforma ajena.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cierre -->
+  <section class="cierre" id="contacto">
+    <div class="wrap">
+      <p class="kicker rv">¿Tu institución necesita algo así?</p>
+      <h2 class="rv">Puedo adaptarla para tu escuela o instituto</h2>
+      <p class="rv">Colegios con varios niveles, institutos de formación superior o cualquier organización que hoy se maneja con planillas. Contame cómo trabajan y vemos qué les sirve.</p>
+      <div class="ctas rv">
+        <a class="btn btn-1" href="./#contacto">Escribime
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 Q11 11.5 18 12 M14 8 Q17 11 18 12 Q17 13 14 16"/></svg>
+        </a>
+        <a class="btn btn-2" href="https://www.escuelanuevaaustral.com.ar" target="_blank" rel="noopener">Ver el sitio de la escuela</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="wrap">
+    <span>Jesús Olguín · Puerto Madryn, Patagonia</span>
+    <a href="./" style="text-decoration:none">Volver al portfolio</a>
+  </div>
+</footer>
+
+<div id="visor" role="dialog" aria-modal="true" aria-label="Captura ampliada">
+  <button type="button" id="visor-cerrar">Cerrar</button>
+  <img alt="">
+  <p></p>
+</div>
+
+<script>
+// Aparicion al hacer scroll (nada se mueve si el sistema pide menos movimiento).
+(function(){
+  var els = document.querySelectorAll('.rv');
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach(function(e){ e.classList.add('on'); }); return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('on'); io.unobserve(en.target); } });
+  }, {rootMargin: '0px 0px -8% 0px'});
+  els.forEach(function(e){ io.observe(e); });
+})();
+
+// Visor de capturas: Escape o un toque lo cierra y el foco vuelve a la imagen.
+(function(){
+  var visor = document.getElementById('visor'), img = visor.querySelector('img'), txt = visor.querySelector('p'), origen = null;
+  function cerrar(){ visor.classList.remove('abierto'); document.body.style.overflow = ''; if (origen) origen.focus(); }
+  document.querySelectorAll('.shot').forEach(function(b){
+    b.addEventListener('click', function(){
+      var i = b.querySelector('img'); origen = b;
+      img.src = i.currentSrc || i.src; img.alt = i.alt; txt.textContent = b.getAttribute('data-cap') || '';
+      visor.classList.add('abierto'); document.body.style.overflow = 'hidden';
+      document.getElementById('visor-cerrar').focus();
+    });
+  });
+  visor.addEventListener('click', function(e){ if (e.target !== img) cerrar(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && visor.classList.contains('abierto')) cerrar(); });
+})();
+</script>
+</body>
+</html>

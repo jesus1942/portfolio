@@ -12,6 +12,7 @@ GitHub Pages: https://jesus1942.github.io/portfolio/
 .
 ├── index.html              # Portfolio de desarrollador (dark / glass / cyan)
 ├── servicios.html          # Landing de servicios técnicos (brutalista naranja/navy)
+├── campus-ena.html         # Caso de estudio de Campus ENA (capturas en campus-ena/)
 ├── server.js               # Express: estáticos + ruta /servicios + fallback SPA
 ├── package.json
 ├── manifest.json           # PWA

@@ -72,6 +72,7 @@ jobs:
           mkdir _site
           cp *.html *.css *.js *.json *.png *.webp robots.txt sitemap.xml _site/ 2>/dev/null || true
           cp -r icons _site/
+          cp -r campus-ena _site/
           # no publicar el server ni los scripts de generación
           rm -f _site/server.js _site/tailwind.config.js _site/gen-*.mjs _site/package*.json
           touch _site/.nojekyll
